@@ -1,3 +1,3 @@
-# CazuelaGaming
-Coding for TimeSpace videogame (name in progress)
+# Time Hopper
+Coding for videogame by CazuelaGaming
 
