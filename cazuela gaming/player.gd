@@ -36,7 +36,7 @@ func _physics_process(delta):
 		pivot.scale.x=sign(direction)
 	if is_on_floor():
 		
-		if velocity.x!=0:
+		if velocity.x!=0 or direction:
 			playback.travel("run")
 		
 		else:
