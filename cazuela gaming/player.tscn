@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c0cgy34r5363o"]
+[gd_scene load_steps=24 format=3 uid="uid://c0cgy34r5363o"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_riarv"]
 [ext_resource type="Texture2D" uid="uid://lca4f12lfbi7" path="res://Fox animations free/fox_idle.png" id="2_3uwmk"]
@@ -220,6 +220,10 @@ graph_offset = Vector2(98, 2)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_cdlqk"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dsex3"]
+radius = 5.0
+height = 26.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_riarv")
 
@@ -227,6 +231,7 @@ script = ExtResource("1_riarv")
 position = Vector2(0, 3)
 scale = Vector2(1.16667, 0.885965)
 shape = SubResource("CapsuleShape2D_bl0aj")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Pivot" type="Node2D" parent="."]
 
@@ -243,3 +248,11 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_cpuqs")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_cdlqk")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_dsex3")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

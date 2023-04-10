@@ -8,11 +8,18 @@ const JUMP_VELOCITY = -200.0
 const GRAVITY = 400
 const ACCELERATION= 1000
 
+
+
+var portal_id= 0 
+
 @onready var pivot= $Pivot
 
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
+
+
+
 func _ready():
 	animation_tree.active = true
 func _physics_process(delta):
@@ -45,7 +52,21 @@ func _physics_process(delta):
 		if velocity.y<0:
 			playback.travel("jump")
 		
-		
-		
-		
+func Teleport(area):
+	for portal in get_tree().get_nodes_in_group("portal"):
+		if portal!= area:
+			if (portal.id==area.id):
+				if (!portal.lockPortal):
+					area.LockedPortal()
+					print("Teletransportado con éxito")
+					global_position=portal.global_position
+					
+
+
+
+func _on_area_2d_area_entered(area):
+	if (area.is_in_group("portal")):
+		print("Se entró al area de portal")
+		if (!area.lockPortal):
+			Teleport(area)
 	
