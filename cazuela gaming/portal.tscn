@@ -304,10 +304,10 @@ sources/0 = SubResource("TileSetAtlasSource_nj02c")
 script = ExtResource("1_i4ufj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -32)
 shape = SubResource("RectangleShape2D_7ywk5")
 
 [node name="TileMap" type="TileMap" parent="."]
+position = Vector2(0, 32)
 tile_set = SubResource("TileSet_rq10k")
 format = 2
 layer_0/tile_data = PackedInt32Array(-1, 655360, 13, -65536, 720896, 13, -65537, 655360, 12, -131072, 720896, 12, -131073, 655360, 11, -196608, 720896, 11, -196609, 655360, 10, -262144, 720896, 10)
