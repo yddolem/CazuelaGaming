@@ -8,8 +8,7 @@ const JUMP_VELOCITY = -200.0
 const GRAVITY = 400
 const ACCELERATION= 1000
 
-
-
+var teleport_time=3
 var portal_id= 0 
 
 @onready var pivot= $Pivot
@@ -17,40 +16,43 @@ var portal_id= 0
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
-
+var stunned = false
 
 
 func _ready():
 	animation_tree.active = true
 func _physics_process(delta):
 	# Add the gravity.
+	if stunned==true:
+		print(stunned)
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
-
-	# Handle Jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y=JUMP_VELOCITY
-	
-	var direction = Input.get_axis("move_left","move_right")
-	
-	
-	velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
-	
-	move_and_slide()
-	
-	#Animation
-	if direction:
-		pivot.scale.x=sign(direction)
-	if is_on_floor():
+	if stunned==false:
 		
-		if velocity.x!=0 or direction:
-			playback.travel("run")
+		# Handle Jump.
+		if Input.is_action_just_pressed("jump") and is_on_floor():
+			velocity.y=JUMP_VELOCITY
 		
+		var direction = Input.get_axis("move_left","move_right")
+		
+		
+		velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
+		
+		move_and_slide()
+		
+		#Animation
+		if direction:
+			pivot.scale.x=sign(direction)
+		if is_on_floor():
+			
+			if velocity.x!=0 or direction:
+				playback.travel("run")
+			
+			else:
+				playback.travel("idle")
 		else:
-			playback.travel("idle")
-	else:
-		if velocity.y<0:
-			playback.travel("jump")
+			if velocity.y<0:
+				playback.travel("jump")
 		
 func Teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
@@ -58,8 +60,15 @@ func Teleport(area):
 			if (portal.id==area.id):
 				if (!portal.lockPortal):
 					area.LockedPortal()
-					print("Teletransportado con éxito")
+					
+					print("Stuneando al personaje")
+					stunned=true
+					await(get_tree().create_timer(2).timeout)
+					
 					global_position=portal.global_position
+					print("Teletransportado con éxito")
+					print("Personaje liberado")
+					stunned=false
 					
 
 
@@ -67,6 +76,9 @@ func Teleport(area):
 func _on_area_2d_area_entered(area):
 	if (area.is_in_group("portal")):
 		print("Se entró al area de portal")
+		
 		if (!area.lockPortal):
+			
+		
 			Teleport(area)
-	
+		

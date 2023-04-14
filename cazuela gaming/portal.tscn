@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbic8qonshec4"]
+[gd_scene load_steps=12 format=3 uid="uid://dbic8qonshec4"]
 
 [ext_resource type="Script" path="res://portal.gd" id="1_i4ufj"]
 [ext_resource type="Texture2D" uid="uid://btrd6y1k20u4i" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Tileset/level_tileset.png" id="1_q0xo7"]
+[ext_resource type="Texture2D" uid="uid://i2buf6eoiead" path="res://free-pixel-magic-sprite-effects-pack/1 Magic/6.png" id="3_6neiv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ywk5"]
-size = Vector2(20, 62)
+size = Vector2(2, 62)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nj02c"]
 texture = ExtResource("1_q0xo7")
@@ -300,6 +301,42 @@ texture = ExtResource("1_q0xo7")
 [sub_resource type="TileSet" id="TileSet_rq10k"]
 sources/0 = SubResource("TileSetAtlasSource_nj02c")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_jg1hq"]
+atlas = ExtResource("3_6neiv")
+region = Rect2(0, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpjqo"]
+atlas = ExtResource("3_6neiv")
+region = Rect2(144, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4fpg3"]
+atlas = ExtResource("3_6neiv")
+region = Rect2(72, 0, 72, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tqjc"]
+atlas = ExtResource("3_6neiv")
+region = Rect2(216, 0, 72, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s0diu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jg1hq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpjqo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4fpg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tqjc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Portal" type="Area2D" groups=["portal"]]
 script = ExtResource("1_i4ufj")
 
@@ -311,3 +348,9 @@ position = Vector2(0, 32)
 tile_set = SubResource("TileSet_rq10k")
 format = 2
 layer_0/tile_data = PackedInt32Array(-1, 655360, 13, -65536, 720896, 13, -65537, 655360, 12, -131072, 720896, 12, -131073, 655360, 11, -196608, 720896, 11, -196609, 655360, 10, -262144, 720896, 10)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 13)
+scale = Vector2(1.34722, 2.91667)
+sprite_frames = SubResource("SpriteFrames_s0diu")
+frame_progress = 0.030385
