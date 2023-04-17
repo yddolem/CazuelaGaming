@@ -255,4 +255,8 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_cdlqk")
 position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_dsex3")
 
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 0.5
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -8,11 +8,14 @@ const JUMP_VELOCITY = -200.0
 const GRAVITY = 400
 const ACCELERATION= 1000
 
-var teleport_time=3
-var portal_id= 0 
+signal teleported(positions)
+
+var teleport_time := 3
+var portal_id := 0 
+var positions : PackedVector2Array = []
 
 @onready var pivot= $Pivot
-
+@onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
@@ -21,6 +24,10 @@ var stunned = false
 
 func _ready():
 	animation_tree.active = true
+	timer.timeout.connect(save_position)
+	timer.start()
+
+
 func _physics_process(delta):
 	# Add the gravity.
 	if stunned==true:
@@ -71,7 +78,8 @@ func Teleport(area):
 					stunned=false
 					
 
-
+func save_position():
+	positions.append(global_position)
 
 func _on_area_2d_area_entered(area):
 	if (area.is_in_group("portal")):

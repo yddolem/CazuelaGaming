@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://7kaafrkxwfes"]
+[gd_scene load_steps=9 format=3 uid="uid://7kaafrkxwfes"]
 
 [ext_resource type="Texture2D" uid="uid://b16knpkwtuy8b" path="res://icon.svg" id="1_hg6q4"]
 [ext_resource type="PackedScene" uid="uid://c0cgy34r5363o" path="res://player.tscn" id="2_f8fbp"]
+[ext_resource type="PackedScene" uid="uid://rpue8b0nrp8q" path="res://player_2.tscn" id="3_02w5p"]
 [ext_resource type="Texture2D" uid="uid://btrd6y1k20u4i" path="res://Foozle_2DT0001_Science_Fiction_Labs_Tileset/Tileset/level_tileset.png" id="3_xu433"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://portal.tscn" id="4_dgox6"]
 
@@ -914,6 +915,9 @@ scale = Vector2(2, 2)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(7.5, -22.5)
 zoom = Vector2(1.5, 1.5)
+
+[node name="player2" parent="." instance=ExtResource("3_02w5p")]
+positions = PackedVector2Array(504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 503.167, 263.933, 386.778, 263.925, 374.278, 263.924, 510.925, 229.257, 421.203, 220.924, 458.426, 263.925, 473.149, 248.369, 387.593, 213.369, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924)
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(0, 1)
