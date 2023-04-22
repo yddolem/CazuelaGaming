@@ -1,16 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://rpue8b0nrp8q"]
+[gd_scene load_steps=5 format=3 uid="uid://rpue8b0nrp8q"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_2t6gp"]
 [ext_resource type="Texture2D" uid="uid://lca4f12lfbi7" path="res://Fox animations free/fox_idle.png" id="1_5fjjc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wya40"]
-radius = 4.28571
+radius = 7.0
 height = 29.3465
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dajkv"]
+size = Vector2(5, 20)
 
 [node name="Player_2" type="CharacterBody2D"]
 script = ExtResource("1_2t6gp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_wya40")
 
 [node name="Pivot" type="Node2D" parent="."]
@@ -18,3 +22,11 @@ shape = SubResource("CapsuleShape2D_wya40")
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 texture = ExtResource("1_5fjjc")
 hframes = 4
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 5)
+shape = SubResource("RectangleShape2D_dajkv")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
