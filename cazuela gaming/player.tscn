@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://c0cgy34r5363o"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_riarv"]
-[ext_resource type="Texture2D" uid="uid://lca4f12lfbi7" path="res://Fox animations free/fox_idle.png" id="2_3uwmk"]
-[ext_resource type="Texture2D" uid="uid://c88av2pucgy51" path="res://Fox animations free/fox_walk.png" id="3_hf42a"]
+[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://animaciones conejo/respirando.png" id="3_c358m"]
 [ext_resource type="Texture2D" uid="uid://v2rb712kxkbi" path="res://Fox animations free/fox_jump.png" id="4_lwmjg"]
+[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://animaciones conejo/caminando.png" id="5_hrpna"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bl0aj"]
 radius = 4.28571
@@ -33,7 +33,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_3uwmk")]
+"values": [ExtResource("3_c358m")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -50,7 +50,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_u64vw"]
 resource_name = "idle"
-length = 0.9
+length = 1.2
 loop_mode = 1
 step = 0.3
 tracks/0/type = "value"
@@ -60,10 +60,10 @@ tracks/0/path = NodePath("Pivot/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -75,7 +75,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_3uwmk")]
+"values": [ExtResource("3_c358m")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -92,7 +92,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_b3pkv"]
 resource_name = "jump"
-length = 1.2
+length = 1.5
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -102,7 +102,7 @@ tracks/0/path = NodePath("Pivot/Sprite2D:hframes")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(1.6),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [6]
@@ -114,7 +114,7 @@ tracks/1/path = NodePath("Pivot/Sprite2D:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.8),
+"times": PackedFloat32Array(1.6),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("4_lwmjg")]
@@ -126,15 +126,15 @@ tracks/2/path = NodePath("Pivot/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [0, 1, 2, 3, 4, 5, 6]
 }
 
 [sub_resource type="Animation" id="Animation_uor05"]
 resource_name = "run"
-length = 0.85
+length = 1.1
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -144,10 +144,10 @@ tracks/0/path = NodePath("Pivot/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("3_hf42a")]
+"values": [ExtResource("5_hrpna"), ExtResource("5_hrpna")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -168,10 +168,10 @@ tracks/2/path = NodePath("Pivot/Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3]
+"values": [0, 1, 2, 3, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olk7j"]
@@ -236,7 +236,9 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-texture = ExtResource("2_3uwmk")
+position = Vector2(-1, 5)
+scale = Vector2(0.375, 0.40625)
+texture = ExtResource("3_c358m")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://7kaafrkxwfes"]
+[gd_scene load_steps=12 format=3 uid="uid://7kaafrkxwfes"]
 
 [ext_resource type="Texture2D" uid="uid://b16knpkwtuy8b" path="res://icon.svg" id="1_hg6q4"]
 [ext_resource type="PackedScene" uid="uid://c0cgy34r5363o" path="res://player.tscn" id="2_f8fbp"]
@@ -895,9 +895,18 @@ sources/0 = SubResource("TileSetAtlasSource_qw4ky")
 
 [sub_resource type="Curve2D" id="Curve2D_3nrbg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217, 0, 0, 0, 0, -147, -226.635, -8.30529, -4.85973, 8.30529, 4.85973, -123, -225.672, 0, 0, 0, 0, -108, -206.399, 0, 0, 0, 0, -102, -188.09, 0, 0, 0, 0, -96, -176.527, 0, 0, 0, 0, -82, -168.818, 0, 0, 0, 0, -52, -168.818, 0, 0, 0, 0, -16, -167.855, 0, 0, 0, 0, 12, -179.418, 0, 0, 0, 0, 35, -181.345, 0, 0, 0, 0, 54, -177.491, 0, 0, 0, 0, 66, -168.818, 0, 0, 0, 0, 79, -162.073, 0, 0, 0, 0, 107, -160.145)
+"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217, 0, 0, 0, 0, -147, -226.635, -10.5325, -7.43523, 10.5325, 7.43523, -123, -225.672, 0, 0, 0, 0, -108, -205.436, 0, 0, 0, 0, -102, -188.09, 0, 0, 0, 0, -96, -176.527, 0, 0, 0, 0, -82, -168.818, 0, 0, 0, 0, -52, -168.818, 0, 0, 0, 0, -16, -167.855, 0, 0, 0, 0, 12, -179.418, 0, 0, 0, 0, 35, -181.345, 0, 0, 0, 0, 52, -179.417, 0, 0, 0, 0, 65, -170.745, 0, 0, 0, 0, 76, -163.036, 0, 0, 0, 0, 85, -157.254, 0, 0, 0, 0, 96, -155.327, 0, 0, 0, 0, 109, -155.327)
 }
-point_count = 17
+point_count = 19
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ffrn0"]
+emission_shape = 1
+emission_sphere_radius = 17.22
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(496, 326)
@@ -916,7 +925,7 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_pmuo2")
 
 [node name="Player" parent="." instance=ExtResource("2_f8fbp")]
-position = Vector2(-324, -96)
+position = Vector2(-324, -97)
 scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -951,3 +960,9 @@ script = ExtResource("5_takmh")
 position = Vector2(-0.999969, -18.3082)
 scale = Vector2(2, 1.928)
 positions = PackedVector2Array(504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 503.167, 263.933, 386.778, 263.925, 374.278, 263.924, 510.925, 229.257, 421.203, 220.924, 458.426, 263.925, 473.149, 248.369, 387.593, 213.369, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Path2D/PathFollow2D/player2"]
+modulate = Color(0.368627, 0, 0.368627, 0.85098)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_ffrn0")
+lifetime = 186.16
