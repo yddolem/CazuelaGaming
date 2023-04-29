@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://rpue8b0nrp8q"]
+[gd_scene load_steps=7 format=3 uid="uid://rpue8b0nrp8q"]
 
 [ext_resource type="Script" path="res://player_2.gd" id="1_2t6gp"]
 [ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://animaciones conejo/respirando.png" id="2_jh1io"]
@@ -10,15 +10,26 @@ height = 29.3465
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dajkv"]
 size = Vector2(5.5, 20)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ssc6b"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vhwtj"]
+
 [node name="Player_2" type="CharacterBody2D"]
+position = Vector2(0, -1)
 scale = Vector2(2, 2)
 script = ExtResource("1_2t6gp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_wya40")
+metadata/_edit_lock_ = true
 
 [node name="Pivot" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 modulate = Color(0.545098, 0.282353, 0.811765, 0.72549)
@@ -26,11 +37,24 @@ position = Vector2(-2, 0)
 scale = Vector2(0.411563, 0.46)
 texture = ExtResource("2_jh1io")
 hframes = 4
+metadata/_edit_lock_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.75, 5)
 shape = SubResource("RectangleShape2D_dajkv")
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.247059, 1, 1)
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_ssc6b")
+texture = SubResource("CanvasTexture_vhwtj")
+randomness = 0.52
+trail_lifetime = 2.22
+trail_sections = 15
+metadata/_edit_lock_ = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
