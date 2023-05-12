@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 
 @export var positions : PackedVector2Array
+
+var newPositions = []
+
 var stunned = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,3 +43,8 @@ func _on_area_2d_area_entered(area):
 	if (area.is_in_group("portal")):
 		if(!area.lockPortal):
 			Teleport(area)
+
+
+
+func _on_player_enviar_positions(positions):
+	newPositions = positions
