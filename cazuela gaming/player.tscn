@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://c0cgy34r5363o"]
+[gd_scene load_steps=26 format=3 uid="uid://c0cgy34r5363o"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_riarv"]
+[ext_resource type="Shader" path="res://player.gdshader" id="2_jlhsn"]
 [ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://animaciones conejo/respirando.png" id="3_c358m"]
 [ext_resource type="Texture2D" uid="uid://v2rb712kxkbi" path="res://Fox animations free/fox_jump.png" id="4_lwmjg"]
 [ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://animaciones conejo/caminando.png" id="5_hrpna"]
@@ -8,6 +9,10 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bl0aj"]
 radius = 4.28571
 height = 29.3465
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j6cr6"]
+shader = ExtResource("2_jlhsn")
+shader_parameter/color = Color(0.196078, 0, 0.329412, 1)
 
 [sub_resource type="Animation" id="Animation_qfvhw"]
 length = 0.001
@@ -236,6 +241,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+material = SubResource("ShaderMaterial_j6cr6")
 position = Vector2(-1, 5)
 scale = Vector2(0.375, 0.40625)
 texture = ExtResource("3_c358m")

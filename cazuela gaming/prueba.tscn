@@ -896,7 +896,7 @@ sources/0 = SubResource("TileSetAtlasSource_qw4ky")
 
 [sub_resource type="Curve2D" id="Curve2D_3nrbg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217, 0, 0, 0, 0, -147, -226.635, -10.5325, -7.43523, 10.5325, 7.43523, -123, -225.672, 0, 0, 0, 0, -108, -205.436, 0, 0, 0, 0, -102, -188.09, 0, 0, 0, 0, -96, -176.527, 0, 0, 0, 0, -82, -168.818, 0, 0, 0, 0, -52, -168.818, 0, 0, 0, 0, -16, -167.855)
+"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217, 0, 0, 0, 0, -147, -226.635, -10.5325, -7.43523, 10.5325, 7.43523, -123, -225.672, 0, 0, 0, 0, -108, -205.436, 0, 0, 0, 0, -102, -188.09, 0, 0, 0, 0, -96, -176.527, 0, 0, 0, 0, -82, -168.818, 0, 0, 0, 0, -52, -168.818, 0, 0, 0, 0, -28, -168.818)
 }
 point_count = 11
 
@@ -970,15 +970,17 @@ process_material = SubResource("ParticleProcessMaterial_ffrn0")
 lifetime = 57.15
 explosiveness = 0.29
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
-
-[node name="ColorRect" type="ColorRect" parent="SubViewport/CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0.309804, 1, 0.901961, 1)
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.309804, 1, 0.686275, 0.172549)
 script = ExtResource("7_pk4q4")
 
-[connection signal="PlayerInverted" from="Player" to="SubViewport/CanvasLayer/ColorRect" method="_on_player_player_inverted"]
+[connection signal="PlayerInverted" from="Player" to="CanvasLayer/ColorRect" method="_on_player_player_inverted"]
 [connection signal="enviarPositions" from="Player" to="Path2D/PathFollow2D/player2" method="_on_player_enviar_positions"]

@@ -3,6 +3,7 @@ extends ColorRect
 var playerInverted = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hide()
 	pass # Replace with function body.
 
 
@@ -13,19 +14,20 @@ func _process(delta):
 
 func _on_player_player_inverted(isInverted):
 	playerInverted = true
-	update_shader()
+	show()
 	
 
 func update_shader():
+	print("funciona")
 	if playerInverted:
 		# Crea el efecto de tono azulado utilizando un VisualShade
 		var visualShader = VisualShader.new()
 		visualShader.set_code("""
 			shader_type canvas_item;
-			uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+			
 			
 			void fragment() {
-				COLOR = texture(SCREEN_TEXTURE, SCREEN_UV) * vec4(0.0, 0.5, 1.0, 1.0);
+				COLOR = texture(TEXTURE, UV) * vec4(0.0, 0.5, 1.0, 1.0);
 			}
 		""")
 
