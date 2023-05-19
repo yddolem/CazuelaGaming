@@ -7,6 +7,8 @@ var newInputs = []
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -200.0
+
+
 const GRAVITY = 400
 const ACCELERATION= 1000
 
@@ -20,16 +22,18 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if get_parent().has_node("PathFollow2D"):
 		look_at(get_parent().get_node("PathFollow2D").get_position() + get_parent().get_node("PathFollow2D").get_offset())
 	
 	if isNPCInverted ==false:
 		for input in newInputs:
+			print(input)
 			var direction = input
 			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
 			move_and_slide()
-			
+
+
 func Teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if portal!= area:
@@ -37,19 +41,16 @@ func Teleport(area):
 				if (!portal.lockPortal):
 					area.LockedPortal()
 					
-					print("Stuneando al personaje")
 					stunned=true
 					await(get_tree().create_timer(2).timeout)
 					
 					global_position=portal.global_position
-					print("Teletransportado con éxito")
-					print("Personaje liberado")
+
 					stunned=false
 					
 
 
 func _on_area_2d_area_entered(area):
-	print("Se entró al area de portal")
 	if (area.is_in_group("portal")):
 		if(!area.lockPortal):
 			Teleport(area)

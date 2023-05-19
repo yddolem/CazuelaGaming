@@ -896,9 +896,9 @@ sources/0 = SubResource("TileSetAtlasSource_qw4ky")
 
 [sub_resource type="Curve2D" id="Curve2D_3nrbg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217, 0, 0, 0, 0, -147, -226.635, -10.5325, -7.43523, 10.5325, 7.43523, -123, -225.672, 0, 0, 0, 0, -108, -205.436, 0, 0, 0, 0, -102, -188.09, 0, 0, 0, 0, -96, -176.527, 0, 0, 0, 0, -82, -168.818, 0, 0, 0, 0, -52, -168.818, 0, 0, 0, 0, -28, -168.818)
+"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -167, -217)
 }
-point_count = 11
+point_count = 3
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ffrn0"]
 emission_shape = 1
@@ -965,6 +965,7 @@ positions = PackedVector2Array(504, 263.995, 504, 263.995, 504, 263.995, 504, 26
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="Path2D/PathFollow2D/player2"]
 modulate = Color(0.105882, 0.352941, 0.407843, 1)
+position = Vector2(-2.5, -1.49941)
 emitting = false
 amount = 10000
 process_material = SubResource("ParticleProcessMaterial_ffrn0")
