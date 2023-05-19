@@ -224,7 +224,7 @@ graph_offset = Vector2(98, 2)
 radius = 5.0
 height = 26.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["players"]]
 script = ExtResource("1_riarv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

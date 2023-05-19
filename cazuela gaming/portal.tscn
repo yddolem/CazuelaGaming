@@ -499,6 +499,10 @@ libraries = {
 "": SubResource("AnimationLibrary_hl2e6")
 }
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_64wer")
 anim_player = NodePath("../AnimationPlayer")
