@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED = 200.0
 const JUMP_VELOCITY = -200.0
 
 
@@ -67,7 +67,7 @@ func _physics_process(delta):
 				playback.travel("jump")
 				
 		if isInverted == false:
-			getInput()
+			saveInput()
 	if stunned == true:
 		playback.travel("idle")
 		
@@ -98,8 +98,9 @@ func _on_area_2d_area_entered(area):
 
 		
 		if (!area.lockPortal):
+			
 			Teleport(area)
 		
-func getInput():
+func saveInput():
 	var direction = -Input.get_axis("move_left","move_right")
 	inputs.append(direction)
