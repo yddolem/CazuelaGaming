@@ -14,8 +14,10 @@ var teleport_time := 3
 var portal_id := 0 
 
 var positions : PackedVector2Array = []
-signal enviarPositions(positions)
+
 signal PlayerInverted(isInverted)
+signal enviarInputs(inputs)
+
 
 @onready var pivot= $Pivot
 @onready var timer = $Timer
@@ -23,18 +25,13 @@ signal PlayerInverted(isInverted)
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
 var stunned = false
-
-
-
-
-
 var isInverted = false
-
+var inputs = []
 
 func _ready():
 	animation_tree.active = true
-	timer.timeout.connect(save_position)
 	timer.start()
+	set_process_input(true)
 
 
 func _physics_process(delta):
@@ -72,7 +69,9 @@ func _physics_process(delta):
 				playback.travel("jump")
 				
 		if isInverted == false:
-			save_position()
+			getInput()
+	if stunned == true:
+		playback.travel("idle")
 func Teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if portal!= area:
@@ -88,13 +87,11 @@ func Teleport(area):
 					print("Teletransportado con éxito")
 					print("Personaje liberado")
 					stunned=false
-					isInverted = not isInverted
+					isInverted = true
 					PlayerInverted.emit(isInverted)
-					enviarPositions.emit(positions)
-
-func save_position():
-	positions.append(global_position)
-
+					enviarInputs.emit(inputs)
+					
+				
 func _on_area_2d_area_entered(area):
 	if (area.is_in_group("portal")):
 		print("Se entró al area de portal")
@@ -102,3 +99,6 @@ func _on_area_2d_area_entered(area):
 		if (!area.lockPortal):
 			Teleport(area)
 		
+func getInput():
+	var direction = Input.get_axis("move_left","move_right")
+	inputs.append(direction)

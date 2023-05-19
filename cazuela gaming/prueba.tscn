@@ -944,7 +944,7 @@ layer_0/tile_data = PackedInt32Array(-196614, 65536, 0, -196613, 65536, 0, -1966
 position = Vector2(108, -176)
 
 [node name="Portal2" parent="." instance=ExtResource("4_dgox6")]
-position = Vector2(199, -98)
+position = Vector2(199, -94)
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-1.52588e-05, 6.18869)
@@ -958,6 +958,7 @@ loop = false
 script = ExtResource("5_takmh")
 
 [node name="player2" parent="Path2D/PathFollow2D" instance=ExtResource("3_02w5p")]
+modulate = Color(0, 1, 1, 1)
 position = Vector2(-0.999969, -18.3082)
 scale = Vector2(2, 1.928)
 positions = PackedVector2Array(504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 504, 263.995, 503.167, 263.933, 386.778, 263.925, 374.278, 263.924, 510.925, 229.257, 421.203, 220.924, 458.426, 263.925, 473.149, 248.369, 387.593, 213.369, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924, 392.871, 263.924)
@@ -976,11 +977,15 @@ explosiveness = 0.29
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.309804, 1, 0.686275, 0.172549)
 script = ExtResource("7_pk4q4")
+metadata/_edit_lock_ = true
 
+[connection signal="PlayerInverted" from="Player" to="Path2D/PathFollow2D/player2" method="_on_player_player_inverted"]
 [connection signal="PlayerInverted" from="Player" to="CanvasLayer/ColorRect" method="_on_player_player_inverted"]
-[connection signal="enviarPositions" from="Player" to="Path2D/PathFollow2D/player2" method="_on_player_enviar_positions"]
+[connection signal="enviarInputs" from="Player" to="Path2D/PathFollow2D/player2" method="_on_player_enviar_inputs"]
