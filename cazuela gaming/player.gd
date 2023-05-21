@@ -8,8 +8,6 @@ const JUMP_VELOCITY = -200.0
 const GRAVITY = 400
 const ACCELERATION= 1000
 
-signal teleported(positions)
-
 var teleport_time := 3
 var portal_id := 0 
 
@@ -25,8 +23,11 @@ signal enviarInputs(inputs)
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
 var stunned = false
+var canJump = true
 var isInverted = false
 var inputs = []
+
+
 
 func _ready():
 	animation_tree.active = true
@@ -38,22 +39,27 @@ func _physics_process(delta):
 
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
+		
 	if stunned==false:
 		
 		
 		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and is_on_floor():
+		if Input.is_action_just_pressed("jump") and canJump:
 			velocity.y=JUMP_VELOCITY
+			canJump = false
 		
 		var direction = Input.get_axis("move_left","move_right")
 		
+		if is_on_floor():
+			canJump = true
 		
-		velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
 		
 		move_and_slide()
 		
 		#Animation
-		if direction:
+		if direction and is_on_floor():
 			pivot.scale.x=sign(direction)
 		if is_on_floor():
 			
@@ -68,6 +74,9 @@ func _physics_process(delta):
 				
 		if isInverted == false:
 			saveInput()
+			
+			
+	
 	if stunned == true:
 		playback.travel("idle")
 		
@@ -102,5 +111,27 @@ func _on_area_2d_area_entered(area):
 			Teleport(area)
 		
 func saveInput():
-	var direction = -Input.get_axis("move_left","move_right")
-	inputs.append(direction)
+	if canJump:
+		if Input.is_action_just_pressed("jump"):
+			print("Guardando salto")
+			var startPosition = global_position
+			var maxJumpHeight = 0
+			var maxJumpPosition = Vector2.ZERO
+			var endPosition = Vector2.ZERO
+
+			if velocity.y < 0 and position.y < startPosition.y:
+				maxJumpHeight = max(maxJumpHeight, startPosition.y - position.y)
+				maxJumpPosition = Vector2(startPosition.x, startPosition.y - maxJumpHeight)
+
+			if canJump:
+				endPosition = global_position
+				
+			var jumpParameters = [startPosition, maxJumpPosition, endPosition]
+			inputs.append(jumpParameters)
+		else:
+			var direction = -Input.get_axis("move_left", "move_right")
+			inputs.append(direction)
+	
+
+
+
