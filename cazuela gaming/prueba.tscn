@@ -943,7 +943,6 @@ layer_0/tile_data = PackedInt32Array(-196614, 65536, 0, -196613, 65536, 0, -1966
 
 [node name="Portal" parent="." instance=ExtResource("4_dgox6")]
 position = Vector2(108, -176)
-id = null
 
 [node name="Portal2" parent="." instance=ExtResource("4_dgox6")]
 position = Vector2(199, -98)
