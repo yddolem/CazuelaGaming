@@ -35,13 +35,13 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
 		
 		if not is_on_floor():
-			print("esta en el aire")
+			#print("esta en el aire")
 			velocity.y += GRAVITY * delta
 		if direction:
 			pivot.scale.x=-sign(direction)
 		if is_on_floor():
 			if velocity.x!=0 or direction:
-				print("corriendo")
+				#print("corriendo")
 				playback.travel("run")
 			
 			else:
