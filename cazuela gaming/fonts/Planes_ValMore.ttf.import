@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cwrx7d6butryr"
-path="res://.godot/imported/Planes_ValMore.ttf-ff7b9d7fb4cde4be1daabecf566e5af4.fontdata"
+path="res://.godot/imported/Planes_ValMore.ttf-57359855ae1b0f3ee154fa7bef188808.fontdata"
 
 [deps]
 
-source_file="res://free-pixel-magic-sprite-effects-pack/Font/Planes_ValMore.ttf"
-dest_files=["res://.godot/imported/Planes_ValMore.ttf-ff7b9d7fb4cde4be1daabecf566e5af4.fontdata"]
+source_file="res://fonts/Planes_ValMore.ttf"
+dest_files=["res://.godot/imported/Planes_ValMore.ttf-57359855ae1b0f3ee154fa7bef188808.fontdata"]
 
 [params]
 
