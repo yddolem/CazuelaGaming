@@ -1,7 +1,9 @@
 extends Area2D
-@onready var animated_sprite=$AnimatedSprite2D
-@export var id = 0
 
+var lockPortal = false
+@onready var timer:Timer = $Timer
+@onready var animated_sprite=$AnimatedSprite2D
+@export var id = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +14,14 @@ func _ready():
 func _process(delta):
 	pass
 
+func playerentered(body):
+	
+	if not body.is_in_group("players"):
+		return
+	
+	lockPortal=true	
+
 func _onTimerComplete():
-	print("No llegaste al mismo tiempo que tu yo del futuro :(")
+	if timer=0:
+		print("No llegaste al mismo tiempo que tu yo del futuro :(")
 	# Realiza las acciones necesarias cuando el temporizador del otro portal ha finalizado
