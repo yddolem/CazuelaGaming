@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cxnmijh485sr1"]
+[gd_scene load_steps=4 format=3 uid="uid://cxnmijh485sr1"]
 
 [ext_resource type="Script" path="res://scenes/GameOverScreen.gd" id="1_1hr75"]
+[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_xjug5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xngjs"]
 bg_color = Color(0.4, 0.4, 0.4, 1)
@@ -25,12 +26,13 @@ theme_override_constants/margin_bottom = 40
 
 [node name="Rows" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 60
+theme_override_constants/separation = 80
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/Rows"]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
+theme_override_fonts/font = ExtResource("2_xjug5")
+theme_override_font_sizes/font_size = 70
 text = "Game Over
 "
 horizontal_alignment = 1
@@ -44,13 +46,22 @@ theme_override_constants/separation = 40
 
 [node name="RetryButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "  Retry  "
+theme_override_fonts/font = ExtResource("2_xjug5")
+theme_override_font_sizes/font_size = 50
+text = "Retry"
+
+[node name="BackToMenuButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_xjug5")
+theme_override_font_sizes/font_size = 50
+text = " Back to menu "
 
 [node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
+theme_override_fonts/font = ExtResource("2_xjug5")
+theme_override_font_sizes/font_size = 50
 text = "Quit"
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Rows/CenterContainer/VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
