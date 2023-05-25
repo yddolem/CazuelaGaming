@@ -930,10 +930,8 @@ position = Vector2(-469, -99)
 scale = Vector2(2, 2)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(7.5, -22.5)
-zoom = Vector2(3, 3)
-limit_left = -20
-limit_right = 800
+position = Vector2(-1, -2)
+zoom = Vector2(1.5, 1.5)
 limit_smoothed = true
 
 [node name="TileMap" type="TileMap" parent="."]
