@@ -230,6 +230,7 @@ script = ExtResource("1_2t6gp")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
 shape = SubResource("CapsuleShape2D_wya40")
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="."]
 

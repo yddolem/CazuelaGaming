@@ -73,9 +73,7 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
 			inputIndex+=1
 		
-		if not is_on_floor():
-			#print("esta en el aire")
-			velocity.y += GRAVITY * delta
+
 		if direction:
 			pivot.scale.x=-sign(direction)
 		
@@ -98,8 +96,8 @@ func Teleport(area):
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if portal!= area:
 			if (portal.id==area.id):
-				if (!portal.lockPortal):
-					area.LockedPortal()
+				if (!portal.lockPortalNPC):
+					area.LockedPortalNPC()
 					
 					stunned=true
 					await(get_tree().create_timer(2).timeout)
@@ -112,7 +110,7 @@ func Teleport(area):
 
 func _on_area_2d_area_entered(area):
 	if (area.is_in_group("portal")):
-		if(!area.lockPortal):
+		if(!area.lockPortalNPC):
 			Teleport(area)
 
 
