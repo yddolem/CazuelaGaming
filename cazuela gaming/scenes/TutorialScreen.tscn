@@ -12,7 +12,7 @@ func _on_demo_1_pressed():
 
 
 func _on_demo_2_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(\"res://escena_salto.tscn\")
 
 
 func _on_demo_3_pressed():
