@@ -8,7 +8,7 @@ script/source = "extends CanvasLayer
 
 
 func _on_demo_1_pressed():
-	pass # Replace with function body.
+	get_tree().change_scene_to_file(\"res://prueba.tscn\")
 
 
 func _on_demo_2_pressed():
