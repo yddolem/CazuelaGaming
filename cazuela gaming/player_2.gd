@@ -22,6 +22,7 @@ var currentWaypointIndex
 var inputIndex = 0
 var jumpIndex =0
 var curvePoints = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -29,43 +30,49 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	
 	if get_parent().has_node("PathFollow2D"):
 		look_at(get_parent().get_node("PathFollow2D").get_position() + get_parent().get_node("PathFollow2D").get_offset())
 	
 	if isNPCInverted ==false and inputIndex<len(newInputs):
+	
 		
 		var input  = newInputs[inputIndex]
 		var direction
+			
+		if jumping == false:
+			print("Ejecutándose paso número " , inputIndex ,"/", len(newInputs)-1)
 		
-		if typeof(input) == TYPE_ARRAY:
+		if typeof(input) == TYPE_ARRAY and len(curvePoints) == 0:
 			jumping = true
-			print("Ejecutando salto invertido")
+			print("ejecutando salto invertido")
 			var jumpParameters = input
-			#Necesitamos pasarle los parametros invertidos, ya que primero partimos desde la caída y
-			#vamos hacia atrás en el tiempo hasta el inicio del salto
 			jumpParameters.reverse()
-			#Ahora, le pasamos estos parametros invertidos a nuestro generador de curvas para que las
-			#interpole
 			print("generando curva con los puntos " , jumpParameters)
 			curvePoints = generateJumpCurve(jumpParameters[0],jumpParameters[1],jumpParameters[2])
 			print("curva resultante",curvePoints)
 			
-		if len(curvePoints) > 0:
-			var currentPoint = curvePoints[0]
-			var movementDirection = currentPoint - position
-			velocity.x = move_toward(velocity.x, movementDirection.x * SPEED, ACCELERATION * delta)
-			velocity.y = move_toward(velocity.y, movementDirection.y * SPEED, ACCELERATION * delta)
-			curvePoints.remove(0)
+		if len(curvePoints) > 0 and jumping == true:
 			
-		
-		if jumpIndex == len(curvePoints):
-			jumping = false
+			if jumpIndex<len(curvePoints):
+				print("saltando")
+				print("paso de salto " , jumpIndex , "/" , len(curvePoints)-1)
+				var currentPoint = curvePoints[jumpIndex]
+				var movementDirection = currentPoint - global_position
+				velocity.x = move_toward(velocity.x, movementDirection.x * SPEED, ACCELERATION * delta)
+				velocity.y = move_toward(velocity.y, movementDirection.y * SPEED, ACCELERATION * delta)
+				jumpIndex +=1
+			else:
+				print("salto finalizado")
+				jumping = false	
+				inputIndex+=1
 			
-				
+						
 		if typeof(input)==TYPE_FLOAT:
 			direction=input
 			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
-			
+			inputIndex+=1
+		
 		if direction:
 			pivot.scale.x=-sign(direction)
 		
@@ -81,8 +88,7 @@ func _physics_process(delta):
 				playback.travel("jump")
 		
 		move_and_slide()
-		inputIndex+=1
-		jumpIndex+=1
+		
 
 
 func Teleport(area):
@@ -123,9 +129,14 @@ func generateJumpCurve(startPosition, maxJumpPosition, endPosition):
 	var curvePoints = []
 	var numPoints = 10
 	
+	var startY = startPosition.y
+	var maxJumpY = maxJumpPosition.y
+	var endY = endPosition.y
+	
 	for i in range(numPoints):
 		var t = i / float(numPoints - 1)
-		var position = quadraticInterpolation(startPosition, maxJumpPosition, endPosition, t)
+		var position = quadraticInterpolation(startPosition, Vector2(startPosition.x, maxJumpY), endPosition, t)
+		position.y = quadraticInterpolation(startY, maxJumpY, endY, t)
 		curvePoints.append(position)
 		
 	return curvePoints

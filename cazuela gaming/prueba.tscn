@@ -896,9 +896,9 @@ sources/0 = SubResource("TileSetAtlasSource_qw4ky")
 
 [sub_resource type="Curve2D" id="Curve2D_3nrbg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -197, -217, 0, 0, 0, 0, -99.7854, -217.781)
+"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, -235.494, -214.89)
 }
-point_count = 3
+point_count = 2
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ffrn0"]
 emission_shape = 1
@@ -926,7 +926,7 @@ position = Vector2(0.5, -0.5)
 shape = SubResource("RectangleShape2D_pmuo2")
 
 [node name="Player" parent="." instance=ExtResource("2_f8fbp")]
-position = Vector2(-472, -98)
+position = Vector2(-453, -95)
 scale = Vector2(2, 2)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -943,7 +943,7 @@ position = Vector2(109, -191)
 position = Vector2(112, -95)
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(425, 150)
+position = Vector2(389, 151)
 scale = Vector2(1.00215, 1.03774)
 curve = SubResource("Curve2D_3nrbg")
 
