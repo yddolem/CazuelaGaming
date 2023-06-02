@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bbbwjludaan6"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ekm12"]
-[ext_resource type="Texture2D" uid="uid://dnt8156qm0iga" path="res://icon.svg" id="1_yw5lj"]
+[ext_resource type="Texture2D" uid="uid://b16knpkwtuy8b" path="res://icon.svg" id="1_yw5lj"]
 [ext_resource type="Script" path="res://replicator.gd" id="3_vlcql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2sjwj"]
@@ -15,7 +15,7 @@ size = Vector2(128, 128)
 polygon = PackedVector2Array(0, 648, 1216, 648, 1216, 192, 960, 192, 960, 256, 1152, 256, 1152, 576, 704, 576, 704, 448, 768, 448, 768, 384, 576, 384, 576, 448, 640, 448, 640, 576, 320, 576, 320, 384, 384, 384, 384, 320, 192, 320, 192, 384, 256, 384, 256, 576, 0, 576)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(288, 256)
+position = Vector2(289, 256)
 collision_layer = 0
 script = ExtResource("1_ekm12")
 

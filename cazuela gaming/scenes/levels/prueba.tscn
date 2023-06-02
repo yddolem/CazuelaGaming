@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://7kaafrkxwfes"]
+[gd_scene load_steps=13 format=3 uid="uid://7kaafrkxwfes"]
 
 [ext_resource type="Texture2D" uid="uid://b16knpkwtuy8b" path="res://icon.svg" id="1_h3vx0"]
 [ext_resource type="PackedScene" uid="uid://c0cgy34r5363o" path="res://scenes/actors/player.tscn" id="2_u4pn1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scenes/actors/PathFollow2D.gd" id="4_wbrss"]
 [ext_resource type="PackedScene" uid="uid://rpue8b0nrp8q" path="res://scenes/actors/player_2.tscn" id="5_3hmod"]
 [ext_resource type="Script" path="res://ColorRect.gd" id="6_vwoot"]
+[ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="7_v5qwx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmuo2"]
 size = Vector2(129, 129)
@@ -895,7 +896,7 @@ sources/0 = SubResource("TileSetAtlasSource_qw4ky")
 
 [sub_resource type="Curve2D" id="Curve2D_3nrbg"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, 309.335, -222.599)
+"points": PackedVector2Array(0, 0, 0, 0, -242, -217, 0, 0, 0, 0, 327.296, -221.635)
 }
 point_count = 2
 
@@ -992,6 +993,12 @@ zoom = Vector2(1.7, 1.7)
 limit_left = -20
 limit_right = 900
 limit_smoothed = true
+
+[node name="Portal" parent="." instance=ExtResource("7_v5qwx")]
+position = Vector2(127, -96)
+
+[node name="Portal2" parent="." instance=ExtResource("7_v5qwx")]
+position = Vector2(131, -187)
 
 [connection signal="PlayerInverted" from="Player" to="Path2D/PathFollow2D/player2" method="_on_player_player_inverted"]
 [connection signal="PlayerInverted" from="Player" to="CanvasLayer/ColorRect" method="_on_player_player_inverted"]
