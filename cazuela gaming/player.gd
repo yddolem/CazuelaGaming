@@ -58,7 +58,8 @@ func _physics_process(delta):
 			velocity.x = direction * SPEED
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+			
+	move_and_slide()
 	# estados actuales
 	if is_on_floor() and not just_jumping:
 		airborne = false
@@ -68,7 +69,7 @@ func _physics_process(delta):
 	
 	# cambio de estado, parte 1: dejó de hacer algo
 	if was_standing and not standing: # si dejó de estar quieto
-		(current_movement as MovementStorage.Standing).position = global_position
+		(current_movement as MovementStorage.Standing).final_position = global_position
 		movement_storage.append(current_movement)
 	elif (was_walking_left and not walking_left) or \
 			(was_walking_right and not walking_right): # si dejó de moverse en una dirección
@@ -92,4 +93,4 @@ func _physics_process(delta):
 		current_movement = MovementStorage.Walking.new(global_position)
 	if max_height_reached: # si estaba subiendo y comenzó a bajar
 		(current_movement as MovementStorage.Jumping).max_height_position = global_position
-	move_and_slide()
+

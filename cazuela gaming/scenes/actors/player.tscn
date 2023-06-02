@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c0cgy34r5363o"]
+[gd_scene load_steps=26 format=3 uid="uid://c0cgy34r5363o"]
 
 [ext_resource type="Script" path="res://scenes/actors/player.gd" id="1_77fg2"]
 [ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_jt7pw"]
@@ -187,24 +187,35 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hh2r1"]
 animation = &"jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5wb8a"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_amq43"]
 animation = &"run"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0dcfa"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i2ifv"]
+graph_offset = Vector2(-377.399, 121.92)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_amq43")
+nodes/Animation/position = Vector2(25.9082, 241.925)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0dcfa")
+nodes/TimeScale/position = Vector2(266.667, 240)
+nodes/output/position = Vector2(480, 240)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"Animation"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehn26"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8dcgi"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ilxvu"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d23ra"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p6ic4"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7etla"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7j5jg"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nakvo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1114g"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u3mhy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eix6c"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cpuqs"]
 states/Start/position = Vector2(200, 65)
@@ -212,12 +223,14 @@ states/idle/node = SubResource("AnimationNodeAnimation_arhuf")
 states/idle/position = Vector2(407, 19)
 states/jump/node = SubResource("AnimationNodeAnimation_hh2r1")
 states/jump/position = Vector2(515, 141)
-states/run/node = SubResource("AnimationNodeAnimation_5wb8a")
-states/run/position = Vector2(573, 19)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
-graph_offset = Vector2(98, 2)
+states/run/node = SubResource("AnimationNodeBlendTree_i2ifv")
+states/run/position = Vector2(567.333, 17.5556)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nakvo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1114g"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_u3mhy"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_eix6c")]
+graph_offset = Vector2(98, -12)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_cdlqk"]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_aeg08"]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_77fg2")
@@ -236,6 +249,7 @@ shape = SubResource("CapsuleShape2D_bl0aj")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 64.0
 libraries = {
 "": SubResource("AnimationLibrary_olk7j")
 }
@@ -244,6 +258,13 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_cpuqs")
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_cdlqk")
+parameters/run/TimeScale/scale = 2.0
+
+[node name="AnimationTree2" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_cpuqs")
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_aeg08")
+parameters/run/TimeScale/scale = 2.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

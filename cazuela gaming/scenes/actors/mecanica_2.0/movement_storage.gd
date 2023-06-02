@@ -8,9 +8,9 @@ var type : MOVEMENT_TYPE
 
 ## Clase para almacenar cuanto tiempo estuvo quieto el jugador
 class Standing extends MovementStorage:
-	var position : Vector2:
+	var final_position : Vector2:
 		set(value):
-			position = value
+			final_position = value
 			duration = (Time.get_ticks_msec() - _start_timestamp) / 1000.0
 	var _start_timestamp : int
 	var duration : float = 0.0
