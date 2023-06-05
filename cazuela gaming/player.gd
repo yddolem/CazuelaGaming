@@ -13,7 +13,7 @@ const JUMP_VELOCITY = -400.0
 var airborne := false 
 var movement_storage : Array[MovementStorage] = []
 var current_movement : MovementStorage = MovementStorage.Standing.new()
-
+var portal_id = 0
 
 signal PlayerInverted(isInverted)
 var stunned = false
@@ -125,3 +125,18 @@ func Teleport(area):
 					
 
 
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("portal"):
+		print("entrando al portal")
+		
+func teleport(area):
+	for portal in get_tree().get_nodes_in_group("portal"):
+		if portal!=area:
+			if (portal.id ==area.id):
+				if (!portal.LockedPortal):
+					print("esperando al jugador 2")
+					
+				
+	
