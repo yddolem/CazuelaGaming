@@ -14,6 +14,18 @@ var airborne := false
 var movement_storage : Array[MovementStorage] = []
 var current_movement : MovementStorage = MovementStorage.Standing.new()
 
+
+signal PlayerInverted(isInverted)
+var stunned = false
+var isInverted = false
+@onready var pivot= $Pivot
+@onready var timer = $Timer
+@onready var animation_player = $AnimationPlayer
+@onready var animation_tree = $AnimationTree
+@onready var playback=animation_tree.get("parameters/playback")
+
+
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -94,3 +106,30 @@ func _physics_process(delta):
 	if max_height_reached: # si estaba subiendo y comenzó a bajar
 		(current_movement as MovementStorage.Jumping).max_height_position = global_position
 
+
+func Teleport(area):
+	for portal in get_tree().get_nodes_in_group("portal"):
+		if portal!= area:
+			if (portal.id==area.id):
+				if (!portal.lockPortal):
+					area.LockedPortal()
+					
+
+					stunned=true
+					await(get_tree().create_timer(2).timeout)
+					
+					global_position=portal.global_position
+
+					stunned=false
+					isInverted = true
+					PlayerInverted.emit(isInverted)
+					#enviarInputs.emit(inputs)
+					
+				
+func _on_area_2d_area_entered(area):
+	if (area.is_in_group("portal")):
+
+		
+		if (!area.lockPortal):
+			
+			Teleport(area)

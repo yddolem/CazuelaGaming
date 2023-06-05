@@ -1,9 +1,159 @@
-[gd_scene load_steps=24 format=3 uid="uid://rpue8b0nrp8q"]
+[gd_scene load_steps=24 format=3 uid="uid://dyxgrjr6cpmag"]
 
-[ext_resource type="Script" path="res://scenes/actors/player_2.gd" id="1_sobq7"]
 [ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_vv1g1"]
 [ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_77jrs"]
 [ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_wqex1"]
+
+[sub_resource type="GDScript" id="GDScript_mnw5j"]
+script/source = "extends CharacterBody2D
+
+
+@export var positions : PackedVector2Array
+
+var newInputs = []
+
+const SPEED = 200.0
+const JUMP_VELOCITY = -200.0
+@onready var pivot= $Pivot
+@onready var animation_player = $AnimationPlayer
+@onready var animation_tree = $AnimationTree
+@onready var playback=animation_tree.get(\"parameters/playback\")
+
+const GRAVITY = 400
+const ACCELERATION= 1000
+
+var jumping = false
+var stunned = false
+var isNPCInverted = true
+var currentWaypointIndex
+var inputIndex = 0
+var jumpIndex =0
+var curvePoints = []
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	
+	if get_parent().has_node(\"PathFollow2D\"):
+		look_at(get_parent().get_node(\"PathFollow2D\").get_position() + get_parent().get_node(\"PathFollow2D\").get_offset())
+	
+	if isNPCInverted ==false and inputIndex<len(newInputs):
+	
+		
+		var input  = newInputs[inputIndex]
+		var direction
+			
+		if jumping == false:
+			print(\"Ejecutándose paso número \" , inputIndex ,\"/\", len(newInputs)-1)
+		
+		if typeof(input) == TYPE_ARRAY and len(curvePoints) == 0:
+			jumping = true
+			print(\"ejecutando salto invertido\")
+			var jumpParameters = input
+			jumpParameters.reverse()
+			print(\"generando curva con los puntos \" , jumpParameters)
+			curvePoints = generateJumpCurve(jumpParameters[0],jumpParameters[1],jumpParameters[2])
+			print(\"curva resultante\",curvePoints)
+			
+		if len(curvePoints) > 0 and jumping == true:
+			
+			if jumpIndex<len(curvePoints):
+				print(\"saltando\")
+				print(\"paso de salto \" , jumpIndex , \"/\" , len(curvePoints)-1)
+				var currentPoint = curvePoints[jumpIndex]
+				var movementDirection = currentPoint - global_position
+				velocity.x = move_toward(velocity.x, movementDirection.x * SPEED, ACCELERATION * delta)
+				velocity.y = move_toward(velocity.y, movementDirection.y * SPEED, ACCELERATION * delta)
+				jumpIndex +=1
+			else:
+				print(\"salto finalizado\")
+				jumping = false	
+				inputIndex+=1
+			
+						
+		if typeof(input)==TYPE_FLOAT:
+			direction=input
+			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
+			inputIndex+=1
+		
+
+		if direction:
+			pivot.scale.x=-sign(direction)
+		
+		if is_on_floor():
+			if velocity.x!=0 or direction:
+				#print(\"corriendo\")
+				playback.travel(\"run\")
+			
+		if velocity.x == 0: 
+				playback.travel(\"idle\")
+		else:
+			if velocity.y<0:
+				playback.travel(\"jump\")
+		
+		move_and_slide()
+		
+
+
+func Teleport(area):
+	for portal in get_tree().get_nodes_in_group(\"portal\"):
+		if portal!= area:
+			if (portal.id==area.id):
+				if (!portal.lockPortalNPC):
+					area.LockedPortalNPC()
+					
+					stunned=true
+					await(get_tree().create_timer(2).timeout)
+					
+					global_position=portal.global_position
+
+					stunned=false
+					
+
+
+func _on_area_2d_area_entered(area):
+	if (area.is_in_group(\"portal\")):
+		if(!area.lockPortalNPC):
+			Teleport(area)
+
+
+
+
+func _on_player_enviar_inputs(inputs):
+	inputs.reverse()
+	newInputs=inputs
+	
+func _on_player_player_inverted(isInverted):
+	isNPCInverted=false
+
+
+
+
+func generateJumpCurve(startPosition, maxJumpPosition, endPosition):
+	var curvePoints = []
+	var numPoints = 10
+	
+	var startY = startPosition.y
+	var maxJumpY = maxJumpPosition.y
+	var endY = endPosition.y
+	
+	for i in range(numPoints):
+		var t = i / float(numPoints - 1)
+		var position = quadraticInterpolation(startPosition, Vector2(startPosition.x, maxJumpY), endPosition, t)
+		position.y = quadraticInterpolation(startY, maxJumpY, endY, t)
+		curvePoints.append(position)
+		
+	return curvePoints
+
+func quadraticInterpolation(startPos, midPos, endPos, t):
+	var p0 = lerp(startPos, midPos, t)
+	var p1 = lerp(midPos, endPos, t)
+	return lerp(p0, p1, t)
+"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wya40"]
 radius = 6.0
@@ -12,7 +162,7 @@ height = 29.3465
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dajkv"]
 size = Vector2(5.5, 20)
 
-[sub_resource type="Animation" id="Animation_qfvhw"]
+[sub_resource type="Animation" id="Animation_oomqo"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -51,7 +201,7 @@ tracks/2/keys = {
 "values": [4]
 }
 
-[sub_resource type="Animation" id="Animation_u64vw"]
+[sub_resource type="Animation" id="Animation_cu0jn"]
 resource_name = "idle"
 length = 1.2
 loop_mode = 1
@@ -93,7 +243,7 @@ tracks/2/keys = {
 "values": [4]
 }
 
-[sub_resource type="Animation" id="Animation_b3pkv"]
+[sub_resource type="Animation" id="Animation_qi2x3"]
 resource_name = "jump"
 length = 1.8
 loop_mode = 1
@@ -135,7 +285,7 @@ tracks/2/keys = {
 "values": [0, 0, 1, 2, 3, 4, 5, 7]
 }
 
-[sub_resource type="Animation" id="Animation_uor05"]
+[sub_resource type="Animation" id="Animation_0m5cr"]
 resource_name = "run"
 length = 1.1
 loop_mode = 1
@@ -177,55 +327,55 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 3]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_olk7j"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1nt1"]
 _data = {
-"RESET": SubResource("Animation_qfvhw"),
-"idle": SubResource("Animation_u64vw"),
-"jump": SubResource("Animation_b3pkv"),
-"run": SubResource("Animation_uor05")
+"RESET": SubResource("Animation_oomqo"),
+"idle": SubResource("Animation_cu0jn"),
+"jump": SubResource("Animation_qi2x3"),
+"run": SubResource("Animation_0m5cr")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_arhuf"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u5bvo"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hh2r1"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2iv7"]
 animation = &"jump"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5wb8a"]
 animation = &"run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ehn26"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0255"]
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8dcgi"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ilxvu"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d23ra"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_55cie"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p6ic4"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7etla"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wusho"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7j5jg"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ki0x6"]
 states/Start/position = Vector2(200, 65)
-states/idle/node = SubResource("AnimationNodeAnimation_arhuf")
+states/idle/node = SubResource("AnimationNodeAnimation_u5bvo")
 states/idle/position = Vector2(407, 19)
-states/jump/node = SubResource("AnimationNodeAnimation_hh2r1")
+states/jump/node = SubResource("AnimationNodeAnimation_h2iv7")
 states/jump/position = Vector2(515, 141)
 states/run/node = SubResource("AnimationNodeAnimation_5wb8a")
 states/run/position = Vector2(573, 19)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0255"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_55cie"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_wusho"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
 graph_offset = Vector2(98, 2)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0j34m"]
 
 [node name="Player_2" type="CharacterBody2D"]
 scale = Vector2(2, 2)
-script = ExtResource("1_sobq7")
+script = SubResource("GDScript_mnw5j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1)
@@ -248,7 +398,7 @@ hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_olk7j")
+"": SubResource("AnimationLibrary_f1nt1")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
