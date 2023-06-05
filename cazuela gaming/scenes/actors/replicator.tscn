@@ -1,165 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://dyxgrjr6cpmag"]
+[gd_scene load_steps=24 format=3 uid="uid://cpgsmnualmc5f"]
 
-[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_vv1g1"]
-[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_77jrs"]
-[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_wqex1"]
+[ext_resource type="Script" path="res://replicator.gd" id="1_ablcr"]
+[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_vijwk"]
+[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_ej2d4"]
+[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_uwbky"]
 
-[sub_resource type="GDScript" id="GDScript_mnw5j"]
-script/source = "extends CharacterBody2D
-
-
-@export var positions : PackedVector2Array
-
-var newInputs = []
-
-const SPEED = 200.0
-const JUMP_VELOCITY = -200.0
-@onready var pivot= $Pivot
-@onready var animation_player = $AnimationPlayer
-@onready var animation_tree = $AnimationTree
-@onready var playback=animation_tree.get(\"parameters/playback\")
-
-const GRAVITY = 400
-const ACCELERATION= 1000
-
-var jumping = false
-var stunned = false
-var isNPCInverted = true
-var currentWaypointIndex
-var inputIndex = 0
-var jumpIndex =0
-var curvePoints = []
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	
-	if get_parent().has_node(\"PathFollow2D\"):
-		look_at(get_parent().get_node(\"PathFollow2D\").get_position() + get_parent().get_node(\"PathFollow2D\").get_offset())
-	
-	if isNPCInverted ==false and inputIndex<len(newInputs):
-	
-		
-		var input  = newInputs[inputIndex]
-		var direction
-			
-		if jumping == false:
-			print(\"Ejecutándose paso número \" , inputIndex ,\"/\", len(newInputs)-1)
-		
-		if typeof(input) == TYPE_ARRAY and len(curvePoints) == 0:
-			jumping = true
-			print(\"ejecutando salto invertido\")
-			var jumpParameters = input
-			jumpParameters.reverse()
-			print(\"generando curva con los puntos \" , jumpParameters)
-			curvePoints = generateJumpCurve(jumpParameters[0],jumpParameters[1],jumpParameters[2])
-			print(\"curva resultante\",curvePoints)
-			
-		if len(curvePoints) > 0 and jumping == true:
-			
-			if jumpIndex<len(curvePoints):
-				print(\"saltando\")
-				print(\"paso de salto \" , jumpIndex , \"/\" , len(curvePoints)-1)
-				var currentPoint = curvePoints[jumpIndex]
-				var movementDirection = currentPoint - global_position
-				velocity.x = move_toward(velocity.x, movementDirection.x * SPEED, ACCELERATION * delta)
-				velocity.y = move_toward(velocity.y, movementDirection.y * SPEED, ACCELERATION * delta)
-				jumpIndex +=1
-			else:
-				print(\"salto finalizado\")
-				jumping = false	
-				inputIndex+=1
-			
-						
-		if typeof(input)==TYPE_FLOAT:
-			direction=input
-			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
-			inputIndex+=1
-		
-
-		if direction:
-			pivot.scale.x=-sign(direction)
-		
-		if is_on_floor():
-			if velocity.x!=0 or direction:
-				#print(\"corriendo\")
-				playback.travel(\"run\")
-			
-		if velocity.x == 0: 
-				playback.travel(\"idle\")
-		else:
-			if velocity.y<0:
-				playback.travel(\"jump\")
-		
-		move_and_slide()
-		
-
-
-func Teleport(area):
-	for portal in get_tree().get_nodes_in_group(\"portal\"):
-		if portal!= area:
-			if (portal.id==area.id):
-				if (!portal.lockPortalNPC):
-					area.LockedPortalNPC()
-					
-					stunned=true
-					await(get_tree().create_timer(2).timeout)
-					
-					global_position=portal.global_position
-
-					stunned=false
-					
-
-
-func _on_area_2d_area_entered(area):
-	if (area.is_in_group(\"portal\")):
-		if(!area.lockPortalNPC):
-			Teleport(area)
-
-
-
-
-func _on_player_enviar_inputs(inputs):
-	inputs.reverse()
-	newInputs=inputs
-	
-func _on_player_player_inverted(isInverted):
-	isNPCInverted=false
-
-
-
-
-func generateJumpCurve(startPosition, maxJumpPosition, endPosition):
-	var curvePoints = []
-	var numPoints = 10
-	
-	var startY = startPosition.y
-	var maxJumpY = maxJumpPosition.y
-	var endY = endPosition.y
-	
-	for i in range(numPoints):
-		var t = i / float(numPoints - 1)
-		var position = quadraticInterpolation(startPosition, Vector2(startPosition.x, maxJumpY), endPosition, t)
-		position.y = quadraticInterpolation(startY, maxJumpY, endY, t)
-		curvePoints.append(position)
-		
-	return curvePoints
-
-func quadraticInterpolation(startPos, midPos, endPos, t):
-	var p0 = lerp(startPos, midPos, t)
-	var p1 = lerp(midPos, endPos, t)
-	return lerp(p0, p1, t)
-"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wya40"]
-radius = 6.0
-height = 29.3465
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dajkv"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj17l"]
 size = Vector2(5.5, 20)
 
 [sub_resource type="Animation" id="Animation_oomqo"]
@@ -186,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_vv1g1")]
+"values": [ExtResource("2_vijwk")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -228,7 +74,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_vv1g1")]
+"values": [ExtResource("2_vijwk")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -258,7 +104,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_77jrs")]
+"values": [ExtResource("3_ej2d4")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -300,7 +146,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_wqex1"), ExtResource("4_wqex1")]
+"values": [ExtResource("4_uwbky"), ExtResource("4_uwbky")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -360,7 +206,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7j5jg"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ki0x6"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ye3l3"]
 states/Start/position = Vector2(200, 65)
 states/idle/node = SubResource("AnimationNodeAnimation_u5bvo")
 states/idle/position = Vector2(407, 19)
@@ -371,29 +217,27 @@ states/run/position = Vector2(573, 19)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0255"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_55cie"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_wusho"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
 graph_offset = Vector2(98, 2)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_0j34m"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_va28k"]
 
-[node name="Player_2" type="CharacterBody2D"]
-scale = Vector2(2, 2)
-script = SubResource("GDScript_mnw5j")
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1lkd"]
+radius = 14.0
+height = 54.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 1)
-shape = SubResource("CapsuleShape2D_wya40")
-disabled = true
+[node name="Replicator" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_ablcr")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.75, 5)
-shape = SubResource("RectangleShape2D_dajkv")
+shape = SubResource("RectangleShape2D_bj17l")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-position = Vector2(-2.5, 2)
-scale = Vector2(0.375, 0.40625)
-texture = ExtResource("2_vv1g1")
+position = Vector2(-0.25, -0.50001)
+texture = ExtResource("2_vijwk")
 hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -402,8 +246,10 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_ki0x6")
+tree_root = SubResource("AnimationNodeStateMachine_ye3l3")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_0j34m")
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_va28k")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 4)
+shape = SubResource("CapsuleShape2D_u1lkd")

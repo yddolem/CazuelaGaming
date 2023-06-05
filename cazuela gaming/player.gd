@@ -19,7 +19,6 @@ signal PlayerInverted(isInverted)
 var stunned = false
 var isInverted = false
 @onready var pivot= $Pivot
-@onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
@@ -122,14 +121,7 @@ func Teleport(area):
 
 					stunned=false
 					isInverted = true
-					PlayerInverted.emit(isInverted)
-					#enviarInputs.emit(inputs)
+					emit_signal("movement_finished", movement_storage, global_position)
 					
-				
-func _on_area_2d_area_entered(area):
-	if (area.is_in_group("portal")):
 
-		
-		if (!area.lockPortal):
-			
-			Teleport(area)
+

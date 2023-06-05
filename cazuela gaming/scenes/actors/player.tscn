@@ -1,143 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://cxp7qrflq4hjg"]
+[gd_scene load_steps=26 format=3 uid="uid://mudxyunkpc3a"]
 
-[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_jt7pw"]
-[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_dtf6o"]
-[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_ssili"]
+[ext_resource type="Script" path="res://player.gd" id="1_7lx30"]
+[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_mjw7j"]
+[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_mh8k7"]
+[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_vjkpu"]
 
-[sub_resource type="GDScript" id="GDScript_h3x6a"]
-script/source = "extends CharacterBody2D
-
-
-const SPEED = 200.0
-const JUMP_VELOCITY = -200.0
-
-
-const GRAVITY = 400
-const ACCELERATION= 1000
-
-var portal_id := 0 
-var isAirborne = false
-
-var positions : PackedVector2Array = []
-
-signal PlayerInverted(isInverted)
-signal enviarInputs(inputs)
-
-@onready var pivot= $Pivot
-@onready var timer = $Timer
-@onready var animation_player = $AnimationPlayer
-@onready var animation_tree = $AnimationTree
-@onready var playback=animation_tree.get(\"parameters/playback\")
-var stunned = false
-var canJump = true
-var isInverted = false
-var isJumping = false
-var airbornePoints = null
-var inputs = []
-
-func _ready():
-	animation_tree.active = true
-	set_process_input(true)
-
-func _physics_process(delta):
-
-	if is_on_floor():
-		canJump = true
-		isAirborne = false #No está saltando ni cayendo
-		isJumping = false #No esta saltando
-
-
-
-	if is_on_floor() == false:
-		velocity.y += GRAVITY * delta
-
-
-
-	if stunned==false:
-		# Handle Jump.
-		if Input.is_action_just_pressed(\"jump\") and canJump:
-			isJumping = true
-			velocity.y=JUMP_VELOCITY
-			canJump = false
-			isAirborne = true
-		
-		var direction = Input.get_axis(\"move_left\",\"move_right\")
-		
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
-		
-		move_and_slide()
-		
-		#Animation
-		if direction and is_on_floor():
-			pivot.scale.x=sign(direction)
-		if is_on_floor():
-			
-			if velocity.x!=0 or direction:
-				playback.travel(\"run\")
-			
-			else:
-				playback.travel(\"idle\")
-		else:
-			if velocity.y<0:
-				playback.travel(\"jump\")
-				
-		if isInverted == false:
-			saveInput()
-			
-			
-	
-	if stunned == true:
-		playback.travel(\"idle\")
-		
-
-
-
-func Teleport(area):
-	for portal in get_tree().get_nodes_in_group(\"portal\"):
-		if portal!= area:
-			if (portal.id==area.id):
-				if (!portal.lockPortal):
-					area.LockedPortal()
-					
-
-					stunned=true
-					await(get_tree().create_timer(2).timeout)
-					
-					global_position=portal.global_position
-
-					stunned=false
-					isInverted = true
-					PlayerInverted.emit(isInverted)
-					enviarInputs.emit(inputs)
-					
-				
-func _on_area_2d_area_entered(area):
-	if (area.is_in_group(\"portal\")):
-
-		
-		if (!area.lockPortal):
-			
-			Teleport(area)
-
-
-
-func saveInput():
-	if isAirborne == false:
-		var direction = -Input.get_axis(\"move_left\", \"move_right\")
-		inputs.append(direction)
-	
-	if isAirborne == true:
-		pass
-		
-		
-		
-
-
-"
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bl0aj"]
-height = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6u4na"]
+size = Vector2(8, 20)
 
 [sub_resource type="Animation" id="Animation_qfvhw"]
 length = 0.001
@@ -163,7 +32,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_jt7pw")]
+"values": [ExtResource("2_mjw7j")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -205,7 +74,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_jt7pw")]
+"values": [ExtResource("2_mjw7j")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -259,7 +128,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_dtf6o")]
+"values": [ExtResource("3_mh8k7")]
 }
 
 [sub_resource type="Animation" id="Animation_uor05"]
@@ -277,7 +146,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("4_ssili"), ExtResource("4_ssili")]
+"values": [ExtResource("4_vjkpu"), ExtResource("4_vjkpu")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -348,7 +217,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eix6c"]
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cpuqs"]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_p8foo"]
 states/Start/position = Vector2(200, 65)
 states/idle/node = SubResource("AnimationNodeAnimation_arhuf")
 states/idle/position = Vector2(407, 19)
@@ -359,24 +228,24 @@ states/run/position = Vector2(567.333, 17.5556)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nakvo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1114g"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_u3mhy"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_eix6c")]
 graph_offset = Vector2(98, -12)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_cdlqk"]
+[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dpj3w"]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_aeg08"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy573"]
+radius = 15.0
+height = 50.0
 
 [node name="Player" type="CharacterBody2D"]
-script = SubResource("GDScript_h3x6a")
+collision_layer = 0
+script = ExtResource("1_7lx30")
 
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-position = Vector2(-1, 3)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_jt7pw")
+texture = ExtResource("2_mjw7j")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_bl0aj")
+shape = SubResource("RectangleShape2D_6u4na")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -386,25 +255,13 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_cpuqs")
+tree_root = SubResource("AnimationNodeStateMachine_p8foo")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_cdlqk")
-parameters/run/TimeScale/scale = 2.0
-
-[node name="AnimationTree2" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_cpuqs")
-anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_aeg08")
+active = true
+parameters/playback = SubResource("AnimationNodeStateMachinePlayback_dpj3w")
 parameters/run/TimeScale/scale = 2.0
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_bl0aj")
-
-[node name="Timer" type="Timer" parent="."]
-process_callback = 0
-wait_time = 0.5
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+shape = SubResource("CapsuleShape2D_dy573")
