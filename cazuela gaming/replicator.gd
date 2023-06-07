@@ -4,7 +4,7 @@ var playerArrivedAtPortal = false
 var isInverted = true
 signal replicatorArrivedAtPortal
 func _ready():
-	($"../Player" as Player).movement_finished.connect(start_replication)
+	($"../../../Player" as Player).movement_finished.connect(start_replication)
 	# NOTA: evitar obtener nodos de esta forma. Si es necesario conectar dos
 	# nodos hermanos, lo correcto es que el nodo superior les conecte.
 	# En este caso habría que crear un script en TestScene que en su _ready haga
@@ -79,7 +79,7 @@ func Teleport(area):
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
-		if !area.lockPortal:
+		if !area.lockPortalNPC:
 			emit_signal("replicatorArrivedAtPortal")
 
 			if playerArrivedAtPortal == true:
