@@ -64,12 +64,15 @@ func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if is_on_floor(): # esto hace que no se pueda controlar en el aire
-		var direction = Input.get_axis("ui_left", "ui_right")
-		if direction:
-			velocity.x = direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+		if stunned==false:
 			
+			var direction = Input.get_axis("ui_left", "ui_right")
+			if direction:
+				velocity.x = direction * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+		if stunned == true:
+			velocity = Vector2.ZERO
 	move_and_slide()
 	# estados actuales
 	if is_on_floor() and not just_jumping:
@@ -129,14 +132,7 @@ func Teleport(area):
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
-		print("entrando al portal")
+		if !area.lockPortal:
+			Teleport(area)
 		
-func teleport(area):
-	for portal in get_tree().get_nodes_in_group("portal"):
-		if portal!=area:
-			if (portal.id ==area.id):
-				if (!portal.LockedPortal):
-					print("esperando al jugador 2")
-					
-				
-	
+

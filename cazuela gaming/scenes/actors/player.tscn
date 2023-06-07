@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_mh8k7"]
 [ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_vjkpu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6u4na"]
-size = Vector2(8, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aeuqn"]
+height = 58.0
 
 [sub_resource type="Animation" id="Animation_qfvhw"]
 length = 0.001
@@ -230,9 +230,8 @@ graph_offset = Vector2(98, -12)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dpj3w"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dy573"]
-radius = 15.0
-height = 50.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hi072"]
+size = Vector2(16, 15)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -241,11 +240,13 @@ script = ExtResource("1_7lx30")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+position = Vector2(-3, -3)
 texture = ExtResource("2_mjw7j")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_6u4na")
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_aeuqn")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -264,6 +265,7 @@ parameters/run/TimeScale/scale = 2.0
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CapsuleShape2D_dy573")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_hi072")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

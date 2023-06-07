@@ -9,16 +9,23 @@
 [node name="Platforms" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms"]
+position = Vector2(-6.10352e-05, 20.9248)
+scale = Vector2(1, 0.96875)
 polygon = PackedVector2Array(0, 648, 1154, 647, 1152, 576, 704, 576, 640, 576, 320, 576, 256, 576, 0, 576)
+one_way_collision_margin = 0.0
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Platforms"]
+position = Vector2(12, 482)
+polygon = PackedVector2Array(-8, 9, 8, 9.00003, 1138, 9, 1138, -2, 8, -3, -8, -3, -8, -3)
 
 [node name="Portal" parent="." instance=ExtResource("6_ppwdi")]
 position = Vector2(923, 546)
 
 [node name="Portal2" parent="." instance=ExtResource("6_ppwdi")]
-position = Vector2(922, 482)
+position = Vector2(923, 448)
 
 [node name="Player" parent="." instance=ExtResource("2_7x6ku")]
-position = Vector2(17, 538)
+position = Vector2(12, 544)
 
 [node name="Replicator" parent="." instance=ExtResource("3_3uk7e")]
-position = Vector2(17, 434)
+position = Vector2(9, 432)
