@@ -75,7 +75,10 @@ func Teleport(area):
 
 					isInverted = false	
 
-					
+
+func _on_player_player_arrived_at_portal():
+	playerArrivedAtPortal = true
+	
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
@@ -84,8 +87,4 @@ func _on_area_2d_area_entered(area):
 
 			if playerArrivedAtPortal == true:
 				Teleport(area)	
-
-
-func _on_player_player_arrived_at_portal():
-	playerArrivedAtPortal = true
-	
+	pass # Replace with function body.

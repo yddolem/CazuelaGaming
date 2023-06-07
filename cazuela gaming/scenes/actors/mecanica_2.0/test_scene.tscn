@@ -43,6 +43,7 @@ curve = SubResource("Curve2D_sdbus")
 position = Vector2(-81, -2)
 rotation = 0.0272042
 rotates = false
+loop = false
 
 [node name="Replicator" parent="Path2D/PathFollow2D" instance=ExtResource("3_3uk7e")]
 

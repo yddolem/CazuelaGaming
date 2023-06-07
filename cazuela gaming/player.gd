@@ -133,9 +133,6 @@ func _on_area_2d_area_entered(area):
 			stunned=true
 			if replicatorArrivedAtPortal == true:
 				Teleport(area)
-		
-
-
-
+				
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
