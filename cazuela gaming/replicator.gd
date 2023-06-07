@@ -1,6 +1,8 @@
 extends CharacterBody2D
 ## Objeto que replica en reversa el movimiento recibido
-
+var playerArrivedAtPortal = false
+var isInverted = true
+signal replicatorArrivedAtPortal
 func _ready():
 	($"../Player" as Player).movement_finished.connect(start_replication)
 	# NOTA: evitar obtener nodos de esta forma. Si es necesario conectar dos
@@ -57,4 +59,33 @@ func replicate_jumping(movement : MovementStorage.Jumping, tween : Tween):
 	tween.parallel().tween_property(self, "global_position:y", movement.initial_position.y, movement.jump_duration) \
 			.set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD) \
 			.set_delay(movement.fall_duration).from(movement.max_height_position.y)
+
+
+func Teleport(area):
+	for portal in get_tree().get_nodes_in_group("portal"):
+		if portal!= area:
+			if (portal.id==area.id):
+				if (!portal.lockPortal):
+					area.LockedPortalNPC()
+					
+
+					await(get_tree().create_timer(2).timeout)
+					
+					global_position=portal.global_position
+
+					isInverted = false	
+
+					
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("portal"):
+		if !area.lockPortal:
+			emit_signal("replicatorArrivedAtPortal")
+
+			if playerArrivedAtPortal == true:
+				Teleport(area)	
+
+
+func _on_player_player_arrived_at_portal():
+	playerArrivedAtPortal = true
 	

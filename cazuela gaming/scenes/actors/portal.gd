@@ -17,7 +17,13 @@ func LockedPortalNPC():
 	lockPortalNPC = true
 	await(get_tree().create_timer(10).timeout	)
 	lockPortalNPC=false
-
+	
+	
+func readyToTeleport():
+	if isReadyNPC & isReadyPlayer:
+		return true
+	else:
+		return false
 
 func _ready():
 	pass

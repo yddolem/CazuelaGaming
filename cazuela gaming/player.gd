@@ -5,7 +5,8 @@ extends CharacterBody2D
 ## CharacterBody con almacenamiento de movimientos para replicación
 
 signal movement_finished(storage:Array[MovementStorage], starting_position:Vector2)
-
+signal playerArrivedAtPortal 
+var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
@@ -14,7 +15,6 @@ var airborne := false
 var movement_storage : Array[MovementStorage] = []
 var current_movement : MovementStorage = MovementStorage.Standing.new()
 var portal_id = 0
-
 signal PlayerInverted(isInverted)
 var stunned = false
 var isInverted = false
@@ -117,7 +117,6 @@ func Teleport(area):
 					area.LockedPortal()
 					
 
-					stunned=true
 					await(get_tree().create_timer(2).timeout)
 					
 					global_position=portal.global_position
@@ -127,12 +126,16 @@ func Teleport(area):
 					emit_signal("movement_finished", movement_storage, global_position)
 					
 
-
-
-
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
 		if !area.lockPortal:
-			Teleport(area)
+			emit_signal("playerArrivedAtPortal")
+			stunned=true
+			if replicatorArrivedAtPortal == true:
+				Teleport(area)
 		
 
+
+
+func _on_replicator_replicator_arrived_at_portal():
+	replicatorArrivedAtPortal = true
