@@ -1,6 +1,6 @@
 class_name Player
 extends CharacterBody2D
-
+var alreadyTeleported = false
 ## Player 
 ## CharacterBody con almacenamiento de movimientos para replicación
 
@@ -31,7 +31,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _unhandled_key_input(_event):
 	var event := _event as InputEventKey
 	if event.keycode==KEY_C and event.pressed and not event.is_echo():
-		set_physics_process(false)
+		#set_physics_process(false)
 		emit_signal("movement_finished", movement_storage, global_position)
 
 ## Physics process separado por estado del jugador
@@ -120,7 +120,7 @@ func Teleport(area):
 					await(get_tree().create_timer(2).timeout)
 					
 					global_position=portal.global_position
-
+					alreadyTeleported = true
 					stunned=false
 					isInverted = true
 					emit_signal("movement_finished", movement_storage, global_position)
@@ -128,11 +128,11 @@ func Teleport(area):
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
-		if !area.lockPortal:
+		if !area.lockPortal && alreadyTeleported == false:
 			emit_signal("playerArrivedAtPortal")
 			stunned=true
-			if replicatorArrivedAtPortal == true:
+			if replicatorArrivedAtPortal == true:	
 				Teleport(area)
-				
+		
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
