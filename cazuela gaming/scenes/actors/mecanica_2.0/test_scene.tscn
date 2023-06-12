@@ -12,6 +12,7 @@ _data = {
 point_count = 2
 
 [node name="TestScene" type="Node2D"]
+position = Vector2(11, -344)
 script = ExtResource("1_hn3j2")
 metadata/_edit_group_ = true
 
