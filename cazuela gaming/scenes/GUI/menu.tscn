@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://lkehci5bvvcf"]
+
+[ext_resource type="Script" path="res://scenes/GUI/main menu.gd" id="1_dhas2"]
+[ext_resource type="LabelSettings" uid="uid://dgsbc87fs4px8" path="res://scenes/GUI/menu.tres" id="2_0p8wy"]
+
+
+[node name="main menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 162.0
+offset_top = 126.0
+offset_right = -104.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dhas2")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+offset_left = 7.0
+offset_top = -13.0
+offset_right = 657.0
+offset_bottom = 260.0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "TimeSpace"
+label_settings = ExtResource("2_0p8wy")
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="Credits" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Exit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"

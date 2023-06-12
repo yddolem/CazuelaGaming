@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbbwjludaan6"]
+
+[ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/test_scene.gd" id="1_hn3j2"]
+[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="2_7x6ku"]
+[ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="3_3uk7e"]
+[ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="6_ppwdi"]
+
+[sub_resource type="Curve2D" id="Curve2D_sdbus"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -81, -2, 0, 0, 0, 0, 824, -4)
+}
+point_count = 2
+
+[node name="TestScene" type="Node2D"]
+position = Vector2(11, -344)
+script = ExtResource("1_hn3j2")
+metadata/_edit_group_ = true
+
+[node name="Platforms" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms"]
+position = Vector2(-6.10352e-05, 20.9248)
+scale = Vector2(1, 0.96875)
+polygon = PackedVector2Array(0, 648, 1154, 647, 1152, 576, 704, 576, 640, 576, 320, 576, 256, 576, 0, 576)
+one_way_collision_margin = 0.0
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Platforms"]
+position = Vector2(12, 482)
+polygon = PackedVector2Array(-8, 9, 8, 9.00003, 1138, 9, 1138, -2, 8, -3, -8, -3, -8, -3)
+
+[node name="Portal" parent="." instance=ExtResource("6_ppwdi")]
+position = Vector2(923, 546)
+
+[node name="Portal2" parent="." instance=ExtResource("6_ppwdi")]
+position = Vector2(923, 448)
+
+[node name="Player" parent="." instance=ExtResource("2_7x6ku")]
+position = Vector2(15, 549)
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(100, 450)
+curve = SubResource("Curve2D_sdbus")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-81, -2)
+rotation = 0.0272042
+rotates = false
+loop = false
+
+[node name="Replicator" parent="Path2D/PathFollow2D" instance=ExtResource("3_3uk7e")]
+
+[connection signal="playerArrivedAtPortal" from="Player" to="." method="_on_player_player_arrived_at_portal"]
+[connection signal="playerArrivedAtPortal" from="Player" to="Path2D/PathFollow2D/Replicator" method="_on_player_player_arrived_at_portal"]
+[connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="." method="_on_replicator_replicator_arrived_at_portal"]
+[connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="Player" method="_on_replicator_replicator_arrived_at_portal"]

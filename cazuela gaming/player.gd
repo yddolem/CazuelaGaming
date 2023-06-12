@@ -1,90 +1,112 @@
+class_name Player
 extends CharacterBody2D
+var alreadyTeleported = false
+## Player 
+## CharacterBody con almacenamiento de movimientos para replicación
 
+signal movement_finished(storage:Array[MovementStorage], starting_position:Vector2)
+signal playerArrivedAtPortal 
+var replicatorArrivedAtPortal = false
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -200.0
-
-
-const GRAVITY = 400
-const ACCELERATION= 1000
-
-var portal_id := 0 
-var isAirborne = false
-
-var positions : PackedVector2Array = []
-
+## To store airborne state
+var airborne := false 
+var movement_storage : Array[MovementStorage] = []
+var current_movement : MovementStorage = MovementStorage.Standing.new()
+var portal_id = 0
 signal PlayerInverted(isInverted)
-signal enviarInputs(inputs)
-
-
+var stunned = false
+var isInverted = false
 @onready var pivot= $Pivot
-@onready var timer = $Timer
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
-var stunned = false
-var canJump = true
-var isInverted = false
-var isJumping = false
-var airbornePoints = null
-var inputs = []
 
-func _ready():
-	animation_tree.active = true
-	set_process_input(true)
 
+
+# Get the gravity from the project settings to be synced with RigidBody nodes.
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _unhandled_key_input(_event):
+	var event := _event as InputEventKey
+	if event.keycode==KEY_C and event.pressed and not event.is_echo():
+		#set_physics_process(false)
+		emit_signal("movement_finished", movement_storage, global_position)
+
+## Physics process separado por estado del jugador
 func _physics_process(delta):
-
-	if is_on_floor():
-		canJump = true
-		isAirborne = false #No está saltando ni cayendo
-		isJumping = false #No esta saltando
-
-
-
-	if is_on_floor() == false:
-		velocity.y += GRAVITY * delta
-
-
-
-	if stunned==false:
-		# Handle Jump.
-		if Input.is_action_just_pressed("jump") and canJump:
-			isJumping = true
-			velocity.y=JUMP_VELOCITY
-			canJump = false
-			isAirborne = true
-		
-		var direction = Input.get_axis("move_left","move_right")
-		
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x,direction*SPEED ,ACCELERATION*delta)
-		
-		move_and_slide()
-		
-		#Animation
-		if direction and is_on_floor():
-			pivot.scale.x=sign(direction)
-		if is_on_floor():
-			
-			if velocity.x!=0 or direction:
-				playback.travel("run")
-			
-			else:
-				playback.travel("idle")
-		else:
-			if velocity.y<0:
-				playback.travel("jump")
-				
-		if isInverted == false:
-			saveInput()
-			
-			
+	# Obtener estados anteriores
+	var was_standing := is_zero_approx(velocity.x) and not airborne
+	var was_walking_left := not was_standing and velocity.x < 0 and not airborne
+	var was_walking_right := not was_standing and velocity.x > 0 and not airborne
+	var was_airborne := airborne
+	# caso especial: diferenciar salto de caída
+	var just_jumping := false
+	# caso especial: diferenciar subida y bajada en salto
+	var going_up := false
+	var max_height_reached := false
 	
-	if stunned == true:
-		playback.travel("idle")
+	if not is_on_floor():
+		going_up = velocity.y < 0 # está subiendo
 		
+		airborne = true
+		velocity.y += gravity * delta
+		
+		max_height_reached = going_up and velocity.y >= 0 # estaba subiendo y ahora bajando
 
+	# Handle Jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		airborne = true
+		just_jumping = true
+		velocity.y = JUMP_VELOCITY
+
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	if is_on_floor(): # esto hace que no se pueda controlar en el aire
+		if stunned==false:
+			
+			var direction = Input.get_axis("ui_left", "ui_right")
+			if direction:
+				velocity.x = direction * SPEED
+			else:
+				velocity.x = move_toward(velocity.x, 0, SPEED)
+		if stunned == true:
+			velocity = Vector2.ZERO
+	move_and_slide()
+	# estados actuales
+	if is_on_floor() and not just_jumping:
+		airborne = false
+	var standing := is_zero_approx(velocity.x) and not airborne
+	var walking_left := not standing and velocity.x < 0 and not airborne
+	var walking_right := not standing and velocity.x > 0 and not airborne
+	
+	# cambio de estado, parte 1: dejó de hacer algo
+	if was_standing and not standing: # si dejó de estar quieto
+		(current_movement as MovementStorage.Standing).final_position = global_position
+		movement_storage.append(current_movement)
+	elif (was_walking_left and not walking_left) or \
+			(was_walking_right and not walking_right): # si dejó de moverse en una dirección
+		(current_movement as MovementStorage.Walking).final_position = global_position
+		movement_storage.append(current_movement)
+	elif was_airborne and not airborne: # si dejó de estar en el aire
+		(current_movement as MovementStorage.Jumping).final_position = global_position
+		movement_storage.append(current_movement)
+	
+	# cambio de estado, parte 2: comenzó a hacer algo
+	if standing and not was_standing: # si comenzó a quedarse quieto
+		current_movement = MovementStorage.Standing.new()
+	elif airborne and not was_airborne: # si comenzó a estar en el aire...
+		current_movement = MovementStorage.Jumping.new(global_position)
+		if just_jumping: # ... debido a un salto 
+			pass # no se hace nada especial, solo crear el storage
+		else: # pero si es por una caída de un ledge hay que setear que no está subiendo
+			(current_movement as MovementStorage.Jumping).max_height_position = global_position
+	elif (walking_left and not was_walking_left) or \
+			(walking_right and not was_walking_right): # si comenzó a moverse en una dirección
+		current_movement = MovementStorage.Walking.new(global_position)
+	if max_height_reached: # si estaba subiendo y comenzó a bajar
+		(current_movement as MovementStorage.Jumping).max_height_position = global_position
 
 
 func Teleport(area):
@@ -95,36 +117,22 @@ func Teleport(area):
 					area.LockedPortal()
 					
 
-					stunned=true
 					await(get_tree().create_timer(2).timeout)
 					
 					global_position=portal.global_position
-
+					alreadyTeleported = true
 					stunned=false
 					isInverted = true
-					PlayerInverted.emit(isInverted)
-					enviarInputs.emit(inputs)
+					emit_signal("movement_finished", movement_storage, global_position)
 					
-				
+
 func _on_area_2d_area_entered(area):
-	if (area.is_in_group("portal")):
-
+	if area.is_in_group("portal"):
+		if !area.lockPortal && alreadyTeleported == false:
+			emit_signal("playerArrivedAtPortal")
+			stunned=true
+			if replicatorArrivedAtPortal == true:	
+				Teleport(area)
 		
-		if (!area.lockPortal):
-			
-			Teleport(area)
-
-
-
-func saveInput():
-	if isAirborne == false:
-		var direction = -Input.get_axis("move_left", "move_right")
-		inputs.append(direction)
-	
-	if isAirborne == true:
-		pass
-		
-		
-		
-
-
+func _on_replicator_replicator_arrived_at_portal():
+	replicatorArrivedAtPortal = true
