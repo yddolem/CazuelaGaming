@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_sdbus"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -81, -2, 0, 0, 0, 0, 824, -4)
+"points": PackedVector2Array(0, 0, 0, 0, -81, -2, 0, 0, 0, 0, 501, -2)
 }
 point_count = 2
 
@@ -19,26 +19,27 @@ metadata/_edit_group_ = true
 [node name="Platforms" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Platforms"]
-position = Vector2(-6.10352e-05, 20.9248)
-scale = Vector2(1, 0.96875)
+position = Vector2(-121.163, 20.9247)
+scale = Vector2(0.650022, 0.96875)
 polygon = PackedVector2Array(0, 648, 1154, 647, 1152, 576, 704, 576, 640, 576, 320, 576, 256, 576, 0, 576)
 one_way_collision_margin = 0.0
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Platforms"]
-position = Vector2(12, 482)
+position = Vector2(-111.713, 482)
+scale = Vector2(0.648342, 1)
 polygon = PackedVector2Array(-8, 9, 8, 9.00003, 1138, 9, 1138, -2, 8, -3, -8, -3, -8, -3)
 
 [node name="Portal" parent="." instance=ExtResource("6_ppwdi")]
-position = Vector2(923, 546)
+position = Vector2(599, 545)
 
 [node name="Portal2" parent="." instance=ExtResource("6_ppwdi")]
-position = Vector2(923, 448)
+position = Vector2(599, 446)
 
 [node name="Player" parent="." instance=ExtResource("2_7x6ku")]
 position = Vector2(15, 549)
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(100, 450)
+position = Vector2(101, 450)
 curve = SubResource("Curve2D_sdbus")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
