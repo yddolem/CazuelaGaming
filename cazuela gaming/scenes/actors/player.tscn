@@ -1,9 +1,9 @@
 [gd_scene load_steps=26 format=3 uid="uid://mudxyunkpc3a"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_7lx30"]
-[ext_resource type="Texture2D" uid="uid://1vg4cij06xy8" path="res://assets/animaciones conejo/respirando.png" id="2_mjw7j"]
-[ext_resource type="Texture2D" uid="uid://bkk8qkdgtkhrb" path="res://assets/animaciones conejo/saltando.png" id="3_mh8k7"]
-[ext_resource type="Texture2D" uid="uid://cgvchnuikqsir" path="res://assets/animaciones conejo/caminando.png" id="4_vjkpu"]
+[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_mjw7j"]
+[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_mh8k7"]
+[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_vjkpu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_aeuqn"]
 height = 58.0
@@ -133,6 +133,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_uor05"]
 resource_name = "run"
+length = 1.1
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -157,7 +158,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -169,7 +170,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_olk7j"]
@@ -192,7 +193,7 @@ animation = &"run"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0dcfa"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_i2ifv"]
-graph_offset = Vector2(-135.376, -50.2145)
+graph_offset = Vector2(-377.399, 121.92)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_amq43")
 nodes/Animation/position = Vector2(25.9082, 241.925)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_0dcfa")
@@ -223,7 +224,7 @@ states/idle/position = Vector2(407, 19)
 states/jump/node = SubResource("AnimationNodeAnimation_hh2r1")
 states/jump/position = Vector2(515, 141)
 states/run/node = SubResource("AnimationNodeBlendTree_i2ifv")
-states/run/position = Vector2(567.333, 19)
+states/run/position = Vector2(567.333, 17.5556)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nakvo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1114g"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_u3mhy"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_eix6c")]
 graph_offset = Vector2(98, -12)
 
@@ -244,12 +245,12 @@ texture = ExtResource("2_mjw7j")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_aeuqn")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+speed_scale = 64.0
 libraries = {
 "": SubResource("AnimationLibrary_olk7j")
 }
@@ -257,11 +258,11 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_p8foo")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_dpj3w")
 parameters/run/TimeScale/scale = 2.0
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-0.5, -1)

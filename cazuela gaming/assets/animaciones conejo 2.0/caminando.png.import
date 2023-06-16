@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4qiibsers4s2"
-path="res://.godot/imported/caminando.png-bbd87a6e91a1db2e3c209247ea920099.ctex"
+uid="uid://bvunp4s5eyscb"
+path="res://.godot/imported/caminando.png-bf04bff94ddd7f8d4d7586d26b67bf51.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animaciones conejo/caminando.png"
-dest_files=["res://.godot/imported/caminando.png-bbd87a6e91a1db2e3c209247ea920099.ctex"]
+source_file="res://assets/animaciones conejo 2.0/caminando.png"
+dest_files=["res://.godot/imported/caminando.png-bf04bff94ddd7f8d4d7586d26b67bf51.ctex"]
 
 [params]
 
