@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bbbwjludaan6"]
 
-[ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/test_scene.gd" id="1_hn3j2"]
+[ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/main.gd" id="1_bbp1l"]
 [ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/Player.tscn" id="2_7x6ku"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="3_3uk7e"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="6_ppwdi"]
@@ -13,7 +13,7 @@ point_count = 2
 
 [node name="TestScene" type="Node2D"]
 position = Vector2(11, -344)
-script = ExtResource("1_hn3j2")
+script = ExtResource("1_bbp1l")
 metadata/_edit_group_ = true
 
 [node name="Platforms" type="StaticBody2D" parent="."]
