@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://cpgsmnualmc5f"]
 
 [ext_resource type="Script" path="res://replicator.gd" id="1_ablcr"]
-[ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_vijwk"]
-[ext_resource type="Texture2D" uid="uid://dgwdoos86kuys" path="res://assets/animaciones conejo/saltando.png" id="3_ej2d4"]
-[ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_uwbky"]
+[ext_resource type="Texture2D" uid="uid://1vg4cij06xy8" path="res://assets/animaciones conejo/respirando.png" id="2_vijwk"]
+[ext_resource type="Texture2D" uid="uid://bkk8qkdgtkhrb" path="res://assets/animaciones conejo/saltando.png" id="3_ej2d4"]
+[ext_resource type="Texture2D" uid="uid://cgvchnuikqsir" path="res://assets/animaciones conejo/caminando.png" id="4_uwbky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj17l"]
 size = Vector2(15, 20)
