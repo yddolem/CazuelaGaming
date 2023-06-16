@@ -231,7 +231,7 @@ graph_offset = Vector2(98, -12)
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_dpj3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hi072"]
-size = Vector2(16, 15)
+size = Vector2(3, 15)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
@@ -265,7 +265,7 @@ parameters/run/TimeScale/scale = 2.0
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -1)
+position = Vector2(-0.5, -1)
 shape = SubResource("RectangleShape2D_hi072")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
