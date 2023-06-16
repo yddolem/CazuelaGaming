@@ -569,10 +569,13 @@ tile_set = SubResource("TileSet_x1s8q")
 format = 2
 
 [node name="Portal" parent="." instance=ExtResource("3_rtft8")]
+position = Vector2(20, 0)
 
 [node name="Portal2" parent="." instance=ExtResource("3_rtft8")]
+position = Vector2(-36, 0)
 
 [node name="Player" parent="." instance=ExtResource("4_1psnr")]
+position = Vector2(85, 4)
 
 [node name="Path2D" type="Path2D" parent="."]
 
