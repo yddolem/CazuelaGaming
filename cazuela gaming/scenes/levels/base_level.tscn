@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_s5you"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="2_urpm1"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="3_rtft8"]
-[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="4_1psnr"]
+[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/Player.tscn" id="4_1psnr"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="5_14bcl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
@@ -585,3 +585,6 @@ loop = false
 [node name="72107" type="Timer" parent="Path2D/PathFollow2D"]
 wait_time = 0.2
 one_shot = true
+
+[connection signal="playerArrivedAtPortal" from="Player" to="Path2D/PathFollow2D/Replicator" method="_on_player_player_arrived_at_portal"]
+[connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="Player" method="_on_replicator_replicator_arrived_at_portal"]
