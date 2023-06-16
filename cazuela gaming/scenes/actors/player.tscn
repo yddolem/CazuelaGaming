@@ -223,7 +223,7 @@ states/idle/position = Vector2(407, 19)
 states/jump/node = SubResource("AnimationNodeAnimation_hh2r1")
 states/jump/position = Vector2(515, 141)
 states/run/node = SubResource("AnimationNodeBlendTree_i2ifv")
-states/run/position = Vector2(567.333, 17.5556)
+states/run/position = Vector2(567.333, 19)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ehn26"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_d23ra"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_7etla"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_nakvo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_1114g"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_u3mhy"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_eix6c")]
 graph_offset = Vector2(98, -12)
 
@@ -244,6 +244,7 @@ texture = ExtResource("2_mjw7j")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_aeuqn")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
@@ -260,6 +261,7 @@ parameters/playback = SubResource("AnimationNodeStateMachinePlayback_dpj3w")
 parameters/run/TimeScale/scale = 2.0
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1)
