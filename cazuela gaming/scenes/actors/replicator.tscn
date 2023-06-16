@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://4qiibsers4s2" path="res://assets/animaciones conejo/caminando.png" id="4_uwbky"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj17l"]
-size = Vector2(15, 20)
+size = Vector2(5, 20)
 
 [sub_resource type="Animation" id="Animation_oomqo"]
 length = 0.001
@@ -230,7 +230,7 @@ script = ExtResource("1_ablcr")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(1.5, 5)
+position = Vector2(0.5, 5)
 shape = SubResource("RectangleShape2D_bj17l")
 
 [node name="Pivot" type="Node2D" parent="."]

@@ -9,7 +9,8 @@ func _ready():
 	path_follow=$Path2D/PathFollow2D
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	path_follow.progress+=npcMoveSpeed*delta
+	if replicatorArrivedAtPortal == false:
+		path_follow.progress+=npcMoveSpeed*delta
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
