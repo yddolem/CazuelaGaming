@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cd0oka5jlde3r"]
+[gd_scene load_steps=11 format=3 uid="uid://cd0oka5jlde3r"]
 
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_s5you"]
 [ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/main.gd" id="1_snbho"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="2_urpm1"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="3_rtft8"]
-[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/Player.tscn" id="4_1psnr"]
+[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="4_1psnr"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="5_14bcl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
@@ -561,6 +561,9 @@ terrain_set_1/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_008bq")
 sources/1 = SubResource("TileSetAtlasSource_4br23")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_q7m06"]
+radius = 165.049
+
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_snbho")
 
@@ -580,7 +583,7 @@ position = Vector2(85, 4)
 [node name="Path2D" type="Path2D" parent="."]
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-81, -2)
+position = Vector2(-151, 1)
 rotation = 0.0272042
 rotates = false
 loop = false
@@ -591,6 +594,19 @@ loop = false
 wait_time = 0.2
 one_shot = true
 
+[node name="PathReversa" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-151, 1)
+rotation = 0.0272042
+scale = Vector2(1, 1)
+loop = false
+
+[node name="AreaReversa" type="Area2D" parent="Path2D/PathReversa" groups=["areaReversa"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathReversa/AreaReversa" groups=["areaReversa"]]
+shape = SubResource("CircleShape2D_q7m06")
+
+[connection signal="GameOver" from="Player" to="." method="_on_player_game_over"]
+[connection signal="PlayerIsInverted" from="Player" to="." method="_on_player_player_is_inverted"]
 [connection signal="playerArrivedAtPortal" from="Player" to="." method="_on_player_player_arrived_at_portal"]
 [connection signal="playerArrivedAtPortal" from="Player" to="Path2D/PathFollow2D/Replicator" method="_on_player_player_arrived_at_portal"]
 [connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="." method="_on_replicator_replicator_arrived_at_portal"]

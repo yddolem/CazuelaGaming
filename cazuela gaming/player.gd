@@ -6,6 +6,8 @@ var alreadyTeleported = false
 
 signal movement_finished(storage:Array[MovementStorage], starting_position:Vector2)
 signal playerArrivedAtPortal 
+signal PlayerIsInverted
+signal GameOver(reason:String)
 var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -15,7 +17,6 @@ var airborne := false
 var movement_storage : Array[MovementStorage] = []
 var current_movement : MovementStorage = MovementStorage.Standing.new()
 var portal_id = 0
-signal PlayerInverted(isInverted)
 var stunned = false
 var isInverted = false
 @onready var pivot= $Pivot
@@ -124,6 +125,7 @@ func Teleport(area):
 					stunned=false
 					isInverted = true
 					emit_signal("movement_finished", movement_storage, global_position)
+					emit_signal("PlayerIsInverted")
 					
 
 func _on_area_2d_area_entered(area):
@@ -136,3 +138,7 @@ func _on_area_2d_area_entered(area):
 		
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
+
+
+
+

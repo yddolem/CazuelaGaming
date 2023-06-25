@@ -38,3 +38,7 @@ rotation = 0.0
 
 [node name="Replicator" parent="Path2D/PathFollow2D" index="0"]
 position = Vector2(-59, -14)
+
+[node name="PathReversa" parent="Path2D" index="1"]
+position = Vector2(517, 277)
+rotation = -3.13209
