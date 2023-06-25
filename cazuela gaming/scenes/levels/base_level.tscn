@@ -597,7 +597,6 @@ one_shot = true
 [node name="PathReversa" type="PathFollow2D" parent="Path2D"]
 position = Vector2(-151, 1)
 rotation = 0.0272042
-scale = Vector2(1, 1)
 loop = false
 
 [node name="AreaReversa" type="Area2D" parent="Path2D/PathReversa" groups=["areaReversa"]]

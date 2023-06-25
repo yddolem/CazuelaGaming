@@ -5,7 +5,7 @@ var timer = 2
 var npcMoveSpeed = 300
 var path_follow
 var PathReversa 
-var PlayerIsInverted
+var PlayerIsInverted= false
 var gameOver = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,10 +22,10 @@ func _physics_process(delta):
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
-	if timer >0:
+	if timer >0 && PlayerIsInverted == false:
 		print(timer)
 	if timer <=0:
-		_on_player_game_over("Portal descoordinado")
+		gameOverHandler("Portal descoordinado")
 		gameOver = true
 
 func portalAwaiting():
@@ -45,5 +45,8 @@ func _on_player_player_is_inverted():
 
 func _on_player_game_over(reason):
 	if (reason == "Personaje no imitó al invertido"):
-		gameOver = true
+		gameOverHandler(reason)
 		
+func gameOverHandler(reason:String):
+	print(reason)
+	gameOver= true
