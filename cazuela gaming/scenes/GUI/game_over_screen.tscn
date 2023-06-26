@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://cwx126d61x2nt"]
+
+[ext_resource type="Script" path="res://scenes/GUI/game_over_screen.gd" id="1_8v4jn"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="1_l2aao"]
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8v4jn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_l2aao")
+theme_override_font_sizes/font_size = 80
+text = "the SPACE TIME FABRIC 
+HAS BEEN DESTROYED"
+horizontal_alignment = 1
+
+[node name="REASON" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_l2aao")
+horizontal_alignment = 1
+
+[node name="TIP" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_l2aao")
+horizontal_alignment = 1
+
+[node name="BACK TO MAIN MENU button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_l2aao")
+theme_override_font_sizes/font_size = 30
+text = "BACK TO MAIN MENU"
+
+[node name="RETRY button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_l2aao")
+theme_override_font_sizes/font_size = 30
+text = "RETRY"
+
+[node name="QUIT TO DESKTOP button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("1_l2aao")
+theme_override_font_sizes/font_size = 30
+text = "QUIT TO DESKTOP"
+
+[connection signal="pressed" from="VBoxContainer/BACK TO MAIN MENU button" to="." method="_on_back_to_main_menu_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/RETRY button" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QUIT TO DESKTOP button" to="." method="_on_quit_to_desktop_button_pressed"]

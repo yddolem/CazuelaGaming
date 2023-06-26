@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://mudxyunkpc3a"]
+[gd_scene load_steps=28 format=3 uid="uid://mudxyunkpc3a"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_7lx30"]
 [ext_resource type="Texture2D" uid="uid://b3w0t8uj1bv7w" path="res://assets/animaciones conejo/respirando.png" id="2_mjw7j"]
@@ -236,6 +236,9 @@ size = Vector2(3, 15)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rjw13"]
 height = 58.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7x0lc"]
+height = 58.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_7lx30")
@@ -277,5 +280,12 @@ shape = SubResource("RectangleShape2D_hi072")
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_rjw13")
 
+[node name="InvertedCollision" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvertedCollision"]
+position = Vector2(-1, 0)
+shape = SubResource("CapsuleShape2D_7x0lc")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="AreaReversa" to="." method="_on_area_reversa_area_exited"]
+[connection signal="area_entered" from="InvertedCollision" to="." method="_on_inverted_collision_area_entered"]

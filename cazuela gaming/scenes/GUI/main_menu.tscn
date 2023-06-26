@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvwofkewldc6s"]
+
+[ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+
+[node name="Main Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -6.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g8bk8")
+
+[node name="Normal" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 224.0
+offset_right = 644.0
+offset_bottom = 364.0
+
+[node name="START button" type="Button" parent="Normal"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "START THE ADVENTURE"
+metadata/_edit_lock_ = true
+
+[node name="HOW TO PLAY button" type="Button" parent="Normal"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "HOW TO PLAY"
+metadata/_edit_lock_ = true
+
+[node name="QUIT button" type="Button" parent="Normal"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "QUIT"
+metadata/_edit_lock_ = true
+
+[node name="Inverted" type="VBoxContainer" parent="."]
+offset_left = 3.0
+offset_top = 6.0
+offset_right = 642.0
+offset_bottom = 147.0
+
+[node name="QUIT button inverted" type="Button" parent="Inverted"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "TIUQ"
+metadata/_edit_lock_ = true
+
+[node name="HOW TO PLAY button inverted" type="Button" parent="Inverted"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "YALP OT WOH"
+metadata/_edit_lock_ = true
+
+[node name="START button inverted" type="Button" parent="Inverted"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_yuj5i")
+theme_override_font_sizes/font_size = 40
+text = "ERUTNEVDA EHT TRATS"
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Normal/START button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Normal/HOW TO PLAY button" to="." method="_on_how_to_play_button_pressed"]
+[connection signal="pressed" from="Normal/QUIT button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Inverted/QUIT button inverted" to="." method="_on_quit_button_inverted_pressed"]
+[connection signal="pressed" from="Inverted/HOW TO PLAY button inverted" to="." method="_on_how_to_play_button_inverted_pressed"]
+[connection signal="pressed" from="Inverted/START button inverted" to="." method="_on_start_button_inverted_pressed"]

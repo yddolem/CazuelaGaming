@@ -572,6 +572,7 @@ position = Vector2(551, 273)
 scale = Vector2(2.3, 2.3)
 texture = ExtResource("2_m6j7y")
 offset = Vector2(-98.877, -66.3744)
+metadata/_edit_lock_ = true
 
 [node name="TileMap2" type="TileMap" parent="." index="1"]
 tile_set = SubResource("TileSet_47jst")
@@ -588,7 +589,7 @@ position = Vector2(567, 129)
 position = Vector2(79, 273)
 
 [node name="Player" parent="." index="5"]
-position = Vector2(128, 147)
+position = Vector2(182, 276)
 
 [node name="Path2D" parent="." index="6"]
 position = Vector2(1, -1)

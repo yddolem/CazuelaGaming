@@ -142,7 +142,10 @@ func _on_replicator_replicator_arrived_at_portal():
 
 func _on_area_reversa_area_exited(area):
 	if area.is_in_group("areaReversa"):
-		print("se salió del area de reversa")
-		if isInverted:
-			print("Game Over, Personaje no imitó al invertido")
-			emit_signal("GameOver","Personaje no imitó al invertido")
+		if isInverted == true:
+			emit_signal("GameOver","Character broke the space-time continium")
+
+
+func _on_inverted_collision_area_entered(area):
+	if area.is_in_group("invertedCollider"):
+		emit_signal("GameOver","Character collided with himself")
