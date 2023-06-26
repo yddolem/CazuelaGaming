@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameOverReason="*res://game_over_reason.gd"
 CurrentScene="*res://current_scene.gd"
+InvertedState="*res://inverted_state.gd"
 
 [display]
 

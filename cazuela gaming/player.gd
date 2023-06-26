@@ -55,13 +55,18 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 		max_height_reached = going_up and velocity.y >= 0 # estaba subiendo y ahora bajando
-
+	if velocity.x>0:
+		playback.travel("run")
+	else:
+		playback.travel("idle")
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		airborne = true
 		just_jumping = true
 		velocity.y = JUMP_VELOCITY
-
+		#ANIMATION
+		playback.travel("jump")
+	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if is_on_floor(): # esto hace que no se pueda controlar en el aire
@@ -143,9 +148,9 @@ func _on_replicator_replicator_arrived_at_portal():
 func _on_area_reversa_area_exited(area):
 	if area.is_in_group("areaReversa"):
 		if isInverted == true:
-			emit_signal("GameOver","Character broke the space-time continium")
+			emit_signal("GameOver","CRITICAL_ERROR :Character broke the space-time continium")
 
 
 func _on_inverted_collision_area_entered(area):
 	if area.is_in_group("invertedCollider"):
-		emit_signal("GameOver","Character collided with himself")
+		emit_signal("GameOver","CRITICAL_ERROR : Character collided with himself")

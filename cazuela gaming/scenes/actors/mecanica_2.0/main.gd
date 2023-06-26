@@ -10,6 +10,8 @@ var gameOver = false
 var gameoverScene 
 var game_over_reason
 var currentLevel
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -25,6 +27,12 @@ func _physics_process(delta):
 	if PlayerIsInverted == true:
 		PathReversa.progress-=npcMoveSpeed*delta
 	
+	
+	
+	
+	
+	
+	
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
@@ -32,7 +40,7 @@ func _physics_process(delta):
 		print(timer)
 	if timer <=0 && gameOver==false:
 		gameOver = true
-		gameOverHandler("Portal desycnc")
+		gameOverHandler("CRITICAL_ERROR: Portal desycnc")
 
 
 func portalAwaiting():
@@ -65,9 +73,9 @@ func gameOverHandler(reason:String):
 	game_over_reason.tip = generateTip(reason)
 	
 func generateTip(reason):
-	if (reason == "Portal desycnc"):
+	if (reason == "CRITICAL_ERROR: Portal desycnc"):
 		return "Remember to enter the portal at the same time as the inverted character"
-	if (reason == "Character collided with himself"):
+	if (reason == "CRITICAL_ERROR : Character collided with himself"):
 		return "Cooperate with your future self to complete the mission"
-	if (reason == "Character broke the space-time continium"):
+	if (reason == "CRITICAL_ERROR :Character broke the space-time continium"):
 		return "Imitate the best as you can the position of the inverted character"

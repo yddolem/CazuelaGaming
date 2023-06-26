@@ -19,8 +19,8 @@ func setGameoverInfo():
 	gameoverTip = game_over_reason.tip
 	updateUI()
 func updateUI():
-	$VBoxContainer/REASON.text = gameoverReason
-	$VBoxContainer/TIP.text = gameoverTip
+	$MarginContainer/VBoxContainer/REASON.text = gameoverReason
+	$MarginContainer/VBoxContainer/TIP.text = gameoverTip
 
 
 func _on_quit_to_desktop_button_pressed():

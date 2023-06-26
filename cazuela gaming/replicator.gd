@@ -3,6 +3,10 @@ extends CharacterBody2D
 var playerArrivedAtPortal = false
 var isInverted = true
 signal replicatorArrivedAtPortal
+@onready var animation_tree = $AnimationTree
+@onready var animation_player = $AnimationPlayer
+@onready var playback= animation_tree.get("parameters/playback")
+
 func _ready():
 	($"../../../Player" as Player).movement_finished.connect(start_replication)
 	# NOTA: evitar obtener nodos de esta forma. Si es necesario conectar dos
@@ -13,10 +17,6 @@ func _ready():
 	# controlado
 	set_physics_process(false)
 
-#func _physics_process(delta:float):
-#	if movement_storage.is_empty():
-#		set_physics_process(false)
-#		return
 
 func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 #	set_physics_process(true)
@@ -29,24 +29,30 @@ func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 func replicate(movement : MovementStorage, tween : Tween):
 	match movement.type:
 		MovementStorage.MOVEMENT_TYPE.STANDING:
+			playback.travel("idle")
 			replicate_standing(movement, tween)
 		MovementStorage.MOVEMENT_TYPE.WALK:
+			playback.travel("run")
 			replicate_walking(movement, tween)
 		MovementStorage.MOVEMENT_TYPE.JUMP:
+			playback.travel("jump")
 			replicate_jumping(movement, tween)
 
 func replicate_standing(movement : MovementStorage.Standing, tween : Tween):
+	
 	# setear la posición y esperar
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	tween.tween_interval(movement.duration)
 
 func replicate_walking(movement : MovementStorage.Walking, tween : Tween):
+	
 	# setear la posición final e interpolar a la inicial
 	# (es lineal, se puede cambiar a otras cosas usando set_ease y set_trans, ver easings.net)
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	tween.tween_property(self, "global_position", movement.initial_position, movement.duration)
 
 func replicate_jumping(movement : MovementStorage.Jumping, tween : Tween):
+	
 	# setear la posición final e interpolar X e Y por separado.
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	# X se interpola linealmente entre la final y la inicial
