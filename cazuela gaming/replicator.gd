@@ -6,6 +6,8 @@ signal replicatorArrivedAtPortal
 @onready var animation_tree = $AnimationTree
 @onready var animation_player = $AnimationPlayer
 @onready var playback= animation_tree.get("parameters/playback")
+var state = InvertedState
+var arrivedAtPortal = false
 
 func _ready():
 	($"../../../Player" as Player).movement_finished.connect(start_replication)
@@ -15,9 +17,18 @@ func _ready():
 	# $Player.movement_finished.connect($Replicator.start_replication)
 	# Solo lo hago aquí mismo para no abultar el código y porque es un ambiente
 	# controlado
-	set_physics_process(false)
-
-
+	#set_physics_process(false)
+	
+func _physics_process(delta):
+	if state.invertedIsIdle==true:
+		playback.travel("idle")
+	if state.invertedIsJumping==true:
+		playback.travel("jump")
+	if (state.invertedIsRunning == true && arrivedAtPortal == false):
+		playback.travel("run")
+	if arrivedAtPortal==true:
+		playback.travel("idle")
+	
 func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 #	set_physics_process(true)
 	global_position = pos
@@ -29,30 +40,30 @@ func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 func replicate(movement : MovementStorage, tween : Tween):
 	match movement.type:
 		MovementStorage.MOVEMENT_TYPE.STANDING:
-			playback.travel("idle")
+			
 			replicate_standing(movement, tween)
 		MovementStorage.MOVEMENT_TYPE.WALK:
-			playback.travel("run")
+			
 			replicate_walking(movement, tween)
 		MovementStorage.MOVEMENT_TYPE.JUMP:
-			playback.travel("jump")
+			
 			replicate_jumping(movement, tween)
 
 func replicate_standing(movement : MovementStorage.Standing, tween : Tween):
-	
+	tween.tween_callback(playback.travel.bind("idle"))
 	# setear la posición y esperar
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	tween.tween_interval(movement.duration)
 
 func replicate_walking(movement : MovementStorage.Walking, tween : Tween):
-	
+	tween.tween_callback(playback.travel.bind("run"))
 	# setear la posición final e interpolar a la inicial
 	# (es lineal, se puede cambiar a otras cosas usando set_ease y set_trans, ver easings.net)
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	tween.tween_property(self, "global_position", movement.initial_position, movement.duration)
 
 func replicate_jumping(movement : MovementStorage.Jumping, tween : Tween):
-	
+	tween.tween_callback(playback.travel.bind("jump"))
 	# setear la posición final e interpolar X e Y por separado.
 	tween.tween_callback(set.bind("global_position", movement.final_position))
 	# X se interpola linealmente entre la final y la inicial
@@ -89,6 +100,7 @@ func _on_player_player_arrived_at_portal():
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
 		if !area.lockPortalNPC:
+			arrivedAtPortal = true
 			emit_signal("replicatorArrivedAtPortal")
 
 			if playerArrivedAtPortal == true:

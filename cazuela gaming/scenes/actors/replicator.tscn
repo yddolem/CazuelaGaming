@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cpgsmnualmc5f"]
+[gd_scene load_steps=26 format=3 uid="uid://cpgsmnualmc5f"]
 
 [ext_resource type="Script" path="res://replicator.gd" id="1_ablcr"]
 [ext_resource type="Texture2D" uid="uid://c6q7tivfev5cw" path="res://assets/animaciones conejo 2.0/respirando.png" id="2_e5mqk"]
@@ -260,6 +260,16 @@ graph_offset = Vector2(57, -32)
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2uim2"]
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c67wu"]
+emission_shape = 1
+emission_sphere_radius = 41.3
+particle_flag_disable_z = true
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color = Color(0.537255, 0.0470588, 0.568627, 1)
+
 [node name="Replicator" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_ablcr")
@@ -276,7 +286,6 @@ shape = SubResource("RectangleShape2D_bj17l")
 position = Vector2(-0.25, -0.50001)
 texture = ExtResource("2_e5mqk")
 hframes = 4
-frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(3, 4)
@@ -299,5 +308,10 @@ tree_root = SubResource("AnimationNodeStateMachine_vc8e8")
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2uim2")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 10000
+process_material = SubResource("ParticleProcessMaterial_c67wu")
+lifetime = 10.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

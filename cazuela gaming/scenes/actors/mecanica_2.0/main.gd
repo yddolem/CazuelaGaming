@@ -10,29 +10,48 @@ var gameOver = false
 var gameoverScene 
 var game_over_reason
 var currentLevel
-
+var current_progress
+var early_y
+var state
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
 	PathReversa = $Path2D/PathReversa
 	game_over_reason = GameOverReason
+	state = InvertedState
 	currentLevel=CurrentScene
+	early_y = position.y
+	current_progress=0
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if replicatorArrivedAtPortal == false:
+	
+	if replicatorArrivedAtPortal == false && PlayerIsInverted == false:
 		path_follow.progress+=npcMoveSpeed*delta
+		
 		PathReversa.progress+=npcMoveSpeed*delta
+		if position.y !=early_y:
+			print("inverted is jumping")
+			state.invertedIsJumping = true
+			state.invertedIsRunning = false
+			state.invertedIsIdle = false
+		
+		if state.invertedIsJumping == false:
+			
+			if  current_progress == path_follow.progress:
+				print("inverted is idle")
+				state.invertedIsIdle = true
+				state.invertedIsRunning = false
+				state.invertedIsJumping = false
+				
+			if current_progress != path_follow.progress:
+				print("inverted is running")
+				state.invertedIsRunning = true
+				state.invertedIsIdle= false
+				state.invertedIsJumping = false
 	if PlayerIsInverted == true:
-		PathReversa.progress-=npcMoveSpeed*delta
-	
-	
-	
-	
-	
-	
-	
+		PathReversa.progress-=npcMoveSpeed*delta	
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
@@ -41,8 +60,9 @@ func _physics_process(delta):
 	if timer <=0 && gameOver==false:
 		gameOver = true
 		gameOverHandler("CRITICAL_ERROR: Portal desycnc")
-
-
+		
+	current_progress = path_follow.progress
+	early_y = position.y
 func portalAwaiting():
 	if (playerArrivedAtPortal != replicatorArrivedAtPortal):
 		return  true
@@ -52,18 +72,11 @@ func _on_player_player_arrived_at_portal():
 	playerArrivedAtPortal = true
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
-
-
 func _on_player_player_is_inverted():
 	PlayerIsInverted = true
-
-
 func _on_player_game_over(reason):
 	gameOver=true
 	gameOverHandler(reason)
-		
-		
-		
 		
 func gameOverHandler(reason:String):
 

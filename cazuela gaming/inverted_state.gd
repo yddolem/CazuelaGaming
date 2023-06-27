@@ -1,5 +1,5 @@
 extends Node
 
-@export var invertedIsIdle:bool
-@export var invertedIsRunning:bool
-@export var invertedIsJumping :bool
+@export var invertedIsIdle= false
+@export var invertedIsRunning = false
+@export var invertedIsJumping = false	
