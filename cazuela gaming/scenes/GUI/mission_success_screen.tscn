@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://larn1chyjnxw"]
+
+[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
+[ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+
+[node name="MissionSuccessScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p1hie")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 638.0
+offset_bottom = 360.0
+color = Color(0.00392157, 0.380392, 0.521569, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 14.0
+offset_top = 23.0
+offset_right = 625.0
+offset_bottom = 334.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TITLE" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_ex603")
+theme_override_font_sizes/font_size = 40
+text = "MISSION SUCCESS"
+horizontal_alignment = 1
+
+[node name="MISSION NUMBER" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_5lian")
+horizontal_alignment = 1
+
+[node name="BACK TO MAIN MENU button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_5lian")
+theme_override_font_sizes/font_size = 30
+text = "BACK TO MAIN MENU"
+alignment = 0
+
+[node name="NEXT MISSION button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_5lian")
+theme_override_font_sizes/font_size = 30
+text = "NEXT MISSION"
+alignment = 0
+
+[node name="QUIT TO DESKTOP button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("2_5lian")
+theme_override_font_sizes/font_size = 30
+text = "QUIT TO DESKTOP"
+alignment = 0
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BACK TO MAIN MENU button" to="." method="_on_back_to_main_menu_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NEXT MISSION button" to="." method="_on_next_mission_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/QUIT TO DESKTOP button" to="." method="_on_quit_to_desktop_button_pressed"]

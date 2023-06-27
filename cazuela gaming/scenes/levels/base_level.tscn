@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cd0oka5jlde3r"]
+[gd_scene load_steps=13 format=3 uid="uid://cd0oka5jlde3r"]
 
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_s5you"]
 [ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/main.gd" id="1_snbho"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="3_rtft8"]
 [ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="4_1psnr"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="5_14bcl"]
+[ext_resource type="PackedScene" uid="uid://bve6l1pukmdcu" path="res://scenes/actors/cama_inicial.tscn" id="7_ql6e4"]
+[ext_resource type="PackedScene" uid="uid://drlqi87bomr1l" path="res://scenes/actors/cama_final.tscn" id="8_ffdw5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
 texture = ExtResource("1_s5you")
@@ -604,9 +606,17 @@ loop = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathReversa/AreaReversa" groups=["areaReversa"]]
 shape = SubResource("CircleShape2D_q7m06")
 
+[node name="Cama Inicial" parent="." instance=ExtResource("7_ql6e4")]
+position = Vector2(137, 39)
+
+[node name="Cama Final" parent="." instance=ExtResource("8_ffdw5")]
+position = Vector2(135, -2)
+
 [connection signal="GameOver" from="Player" to="." method="_on_player_game_over"]
+[connection signal="MissionSuccess" from="Player" to="." method="_on_player_mission_success"]
 [connection signal="PlayerIsInverted" from="Player" to="." method="_on_player_player_is_inverted"]
 [connection signal="playerArrivedAtPortal" from="Player" to="." method="_on_player_player_arrived_at_portal"]
 [connection signal="playerArrivedAtPortal" from="Player" to="Path2D/PathFollow2D/Replicator" method="_on_player_player_arrived_at_portal"]
+[connection signal="replicatorArrivedAtBed" from="Path2D/PathFollow2D/Replicator" to="." method="_on_replicator_replicator_arrived_at_bed"]
 [connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="." method="_on_replicator_replicator_arrived_at_portal"]
 [connection signal="replicatorArrivedAtPortal" from="Path2D/PathFollow2D/Replicator" to="Player" method="_on_replicator_replicator_arrived_at_portal"]

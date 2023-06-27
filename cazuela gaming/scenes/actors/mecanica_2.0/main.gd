@@ -1,6 +1,7 @@
 extends Node2D
 var playerArrivedAtPortal = false
 var replicatorArrivedAtPortal = false	
+var replicatorArrivedAtBed
 var timer = 2
 var npcMoveSpeed = 300
 var path_follow
@@ -13,7 +14,8 @@ var currentLevel
 var current_progress
 var early_y
 var state
-
+var MissionSuccessScene
+var missionSuccess = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -27,10 +29,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
-	if replicatorArrivedAtPortal == false && PlayerIsInverted == false:
+	if replicatorArrivedAtPortal == false && path_follow.progress_ratio<1:
 		path_follow.progress+=npcMoveSpeed*delta
-		
 		PathReversa.progress+=npcMoveSpeed*delta
+		
 		if position.y !=early_y:
 			print("inverted is jumping")
 			state.invertedIsJumping = true
@@ -50,6 +52,9 @@ func _physics_process(delta):
 				state.invertedIsRunning = true
 				state.invertedIsIdle= false
 				state.invertedIsJumping = false
+			
+	
+		
 	if PlayerIsInverted == true:
 		PathReversa.progress-=npcMoveSpeed*delta	
 	#Si uno llega al portal y el otro no	
@@ -72,11 +77,13 @@ func _on_player_player_arrived_at_portal():
 	playerArrivedAtPortal = true
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
+	path_follow.progress_ratio = 1
 func _on_player_player_is_inverted():
 	PlayerIsInverted = true
 func _on_player_game_over(reason):
-	gameOver=true
-	gameOverHandler(reason)
+	if missionSuccess == false:
+		gameOver=true
+		gameOverHandler(reason)
 		
 func gameOverHandler(reason:String):
 
@@ -85,6 +92,11 @@ func gameOverHandler(reason:String):
 	game_over_reason.reason = reason
 	game_over_reason.tip = generateTip(reason)
 	
+func missionSuccessHandler():
+	print("Cambiando a escena mission success")
+	MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
+	get_tree().change_scene_to_packed(MissionSuccessScene)
+	
 func generateTip(reason):
 	if (reason == "CRITICAL_ERROR: Portal desycnc"):
 		return "Remember to enter the portal at the same time as the inverted character"
@@ -92,3 +104,13 @@ func generateTip(reason):
 		return "Cooperate with your future self to complete the mission"
 	if (reason == "CRITICAL_ERROR :Character broke the space-time continium"):
 		return "Imitate the best as you can the position of the inverted character"
+
+
+func _on_player_mission_success():
+	missionSuccess = true
+	missionSuccessHandler()
+	
+func _on_replicator_replicator_arrived_at_bed():
+	missionSuccess = true
+	replicatorArrivedAtBed = true
+	missionSuccessHandler()

@@ -3,6 +3,8 @@ extends CharacterBody2D
 var playerArrivedAtPortal = false
 var isInverted = true
 signal replicatorArrivedAtPortal
+signal replicatorArrivedAtBed
+
 @onready var animation_tree = $AnimationTree
 @onready var animation_player = $AnimationPlayer
 @onready var playback= animation_tree.get("parameters/playback")
@@ -17,7 +19,7 @@ func _ready():
 	# $Player.movement_finished.connect($Replicator.start_replication)
 	# Solo lo hago aquí mismo para no abultar el código y porque es un ambiente
 	# controlado
-	#set_physics_process(false)
+	# set_physics_process(false)
 	
 func _physics_process(delta):
 	if state.invertedIsIdle==true:
@@ -33,9 +35,11 @@ func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 #	set_physics_process(true)
 	global_position = pos
 	storage.reverse()
+	set_as_top_level(true)
 	var tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	for movement in storage:
 		replicate(movement, tween)
+	
 
 func replicate(movement : MovementStorage, tween : Tween):
 	match movement.type:
@@ -105,4 +109,7 @@ func _on_area_2d_area_entered(area):
 
 			if playerArrivedAtPortal == true:
 				Teleport(area)	
-	pass # Replace with function body.
+
+func _on_area_cama_area_entered(area):
+	if area.is_in_group("cama_inicial"):
+		emit_signal("replicatorArrivedAtBed")

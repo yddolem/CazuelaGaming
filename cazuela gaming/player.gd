@@ -8,6 +8,7 @@ signal movement_finished(storage:Array[MovementStorage], starting_position:Vecto
 signal playerArrivedAtPortal 
 signal PlayerIsInverted
 signal GameOver(reason:String)
+signal MissionSuccess
 var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -154,3 +155,9 @@ func _on_area_reversa_area_exited(area):
 func _on_inverted_collision_area_entered(area):
 	if area.is_in_group("invertedCollider"):
 		emit_signal("GameOver","CRITICAL_ERROR : Character collided with himself")
+
+
+func _on_area_cama_area_entered(area):
+	if area.is_in_group("cama_final"):
+		emit_signal("MissionSuccess")
+		
