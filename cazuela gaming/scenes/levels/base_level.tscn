@@ -612,6 +612,11 @@ position = Vector2(137, 39)
 [node name="Cama Final" parent="." instance=ExtResource("8_ffdw5")]
 position = Vector2(135, -2)
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0.266667, 0.25098, 0.752941, 0.466667)
+
 [connection signal="GameOver" from="Player" to="." method="_on_player_game_over"]
 [connection signal="MissionSuccess" from="Player" to="." method="_on_player_mission_success"]
 [connection signal="PlayerIsInverted" from="Player" to="." method="_on_player_player_is_inverted"]

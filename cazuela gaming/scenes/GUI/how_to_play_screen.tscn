@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://h55nsw3y1xh7"]
+
+[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_h3f1n"]
+[ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_yx8hn"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_2ddr1"]
+
+[node name="how to play screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yx8hn")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -2.0
+offset_right = 671.0
+offset_bottom = 394.0
+color = Color(0.00392157, 0.380392, 0.521569, 1)
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 625.0
+offset_bottom = 368.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TITLE" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_h3f1n")
+theme_override_font_sizes/font_size = 30
+text = "RULES OF TIME-TRAVELLING"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ddr1")
+theme_override_font_sizes/font_size = 30
+text = "#1 NEVER GOT IN CONTACT WITH
+ YOUR FUTURE/PAST SELF"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ddr1")
+theme_override_font_sizes/font_size = 30
+text = "#2 THE FREE WILL DOESNT EXIST . 
+YOU MUST COPY THE MOVEMENTS OF 
+YOUR FUTURE SELF. (FOLLOW THE TRAILS)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ddr1")
+theme_override_font_sizes/font_size = 30
+text = "#3  YOU MUST ARRIVE AT 
+THE BED AND THE PORTAL SYNCHRONIZED"
+
+[node name="MAIN MENU button" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_2ddr1")
+theme_override_font_sizes/font_size = 30
+text = "BACK TO MAIN MENU"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MAIN MENU button" to="." method="_on_main_menu_button_pressed"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
 [ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
 
 [node name="MissionSuccessScreen" type="Control"]
 layout_mode = 3
@@ -14,11 +14,13 @@ grow_vertical = 2
 script = ExtResource("1_p1hie")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 638.0
 offset_bottom = 360.0
 color = Color(0.00392157, 0.380392, 0.521569, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
 offset_left = 14.0
 offset_top = 23.0
 offset_right = 625.0
