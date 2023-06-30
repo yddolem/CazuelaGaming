@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxpqapkfk0yd3"]
+[gd_scene load_steps=4 format=3 uid="uid://dxpqapkfk0yd3"]
 
 [ext_resource type="PackedScene" uid="uid://cd0oka5jlde3r" path="res://scenes/levels/base_level.tscn" id="1_vrnen"]
 [ext_resource type="Texture2D" uid="uid://dug5gis4c7hqw" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/_Complete_static_BG_(288 x 208).png" id="2_joy4e"]
+
+[sub_resource type="Curve2D" id="Curve2D_wpkby"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -157, -1, 0, 0, 0, 0, 381, -2)
+}
+point_count = 2
 
 [node name="BaseLevel" instance=ExtResource("1_vrnen")]
 
@@ -24,6 +30,15 @@ position = Vector2(59, 324)
 
 [node name="Path2D" parent="." index="5"]
 position = Vector2(210, 145)
+curve = SubResource("Curve2D_wpkby")
+
+[node name="PathFollow2D" parent="Path2D" index="0"]
+position = Vector2(-157, -1)
+
+[node name="PathReversa" parent="Path2D" index="1"]
+position = Vector2(-157, -1)
+rotation = -0.00185873
+metadata/_edit_lock_ = true
 
 [node name="Cama Inicial" parent="." index="6"]
 position = Vector2(60, 340)
