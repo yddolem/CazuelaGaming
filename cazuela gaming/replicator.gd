@@ -10,6 +10,7 @@ signal replicatorArrivedAtBed
 @onready var playback= animation_tree.get("parameters/playback")
 var state = InvertedState
 var arrivedAtPortal = false
+var trails
 
 func _ready():
 	($"../../../Player" as Player).movement_finished.connect(start_replication)
@@ -20,7 +21,7 @@ func _ready():
 	# Solo lo hago aquí mismo para no abultar el código y porque es un ambiente
 	# controlado
 	# set_physics_process(false)
-	
+	trails = $GPUParticles2D
 func _physics_process(delta):
 	if state.invertedIsIdle==true:
 		playback.travel("idle")
@@ -105,6 +106,7 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
 		if !area.lockPortalNPC:
 			arrivedAtPortal = true
+			trails.emitting = false
 			emit_signal("replicatorArrivedAtPortal")
 
 			if playerArrivedAtPortal == true:
