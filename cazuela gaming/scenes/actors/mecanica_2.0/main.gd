@@ -16,6 +16,8 @@ var early_y
 var state
 var MissionSuccessScene
 var missionSuccess = false
+var colorRect 
+var trails 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -25,6 +27,9 @@ func _ready():
 	currentLevel=CurrentScene
 	early_y = position.y
 	current_progress=0
+	colorRect  = $ColorRect
+	colorRect.hide()
+	trails = $Path2D/PathFollow2D/Replicator/GPUParticles2D
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -57,6 +62,8 @@ func _physics_process(delta):
 		
 	if PlayerIsInverted == true:
 		PathReversa.progress-=npcMoveSpeed*delta	
+		colorRect.show()
+		
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
