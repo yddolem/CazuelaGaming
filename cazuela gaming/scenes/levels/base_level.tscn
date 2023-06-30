@@ -577,6 +577,7 @@ format = 2
 position = Vector2(20, 0)
 
 [node name="Portal2" parent="." instance=ExtResource("3_rtft8")]
+modulate = Color(0.352941, 0.588235, 0.937255, 1)
 position = Vector2(-36, 0)
 
 [node name="Player" parent="." instance=ExtResource("4_1psnr")]
