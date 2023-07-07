@@ -28,7 +28,9 @@ func _on_quit_to_desktop_button_pressed():
 
 
 func _on_retry_button_pressed():
-	get_tree().change_scene_to_file(CurrentScene.level)
+	var currentMissionId =CurrentScene.misionId
+	var currentScene = CurrentScene.levelArray[currentMissionId]
+	get_tree().change_scene_to_file(currentScene)
 
 func _on_back_to_main_menu_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/GUI/main_menu.tscn")

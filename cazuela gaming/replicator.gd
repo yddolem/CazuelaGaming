@@ -11,6 +11,7 @@ signal replicatorArrivedAtBed
 var state = InvertedState
 var arrivedAtPortal = false
 var trails
+@onready var pivot = $Pivot
 
 func _ready():
 	($"../../../Player" as Player).movement_finished.connect(start_replication)
@@ -40,7 +41,9 @@ func start_replication(storage: Array[MovementStorage], pos: Vector2) -> void:
 	var tween = create_tween().set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 	for movement in storage:
 		replicate(movement, tween)
-	
+
+func changeOrientation(orientation):
+	pivot.scale.x = orientation
 
 func replicate(movement : MovementStorage, tween : Tween):
 	match movement.type:
@@ -65,6 +68,10 @@ func replicate_walking(movement : MovementStorage.Walking, tween : Tween):
 	# setear la posición final e interpolar a la inicial
 	# (es lineal, se puede cambiar a otras cosas usando set_ease y set_trans, ver easings.net)
 	tween.tween_callback(set.bind("global_position", movement.final_position))
+	if movement.final_position>movement.initial_position:
+		tween.tween_callback(changeOrientation.bind(1))
+	if movement.final_position<movement.initial_position:
+		tween.tween_callback(changeOrientation.bind(-1))
 	tween.tween_property(self, "global_position", movement.initial_position, movement.duration)
 
 func replicate_jumping(movement : MovementStorage.Jumping, tween : Tween):

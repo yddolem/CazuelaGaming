@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://mudxyunkpc3a"]
+[gd_scene load_steps=25 format=3 uid="uid://mudxyunkpc3a"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_7lx30"]
 [ext_resource type="Texture2D" uid="uid://c6q7tivfev5cw" path="res://assets/animaciones conejo 2.0/respirando.png" id="2_jhd6c"]
@@ -259,8 +259,6 @@ states/run/position = Vector2(573, 19)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0255"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_55cie"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_wusho"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
 graph_offset = Vector2(57, -32)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_mts88"]
-
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_7lx30")
@@ -304,7 +302,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_svb85")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_mts88")
 
 [node name="Area CAMA" type="Area2D" parent="."]
 

@@ -1,3 +1,11 @@
 extends Node
-@export var current_level_number = 1 
-@export var level= "res://scenes/levels/level_1_1.tscn"
+@export var misionId = 0
+@export var levelArray=["res://scenes/levels/level_1_0.tscn",
+"res://scenes/levels/level_1_1.tscn"]
+
+
+
+
+
+
+
