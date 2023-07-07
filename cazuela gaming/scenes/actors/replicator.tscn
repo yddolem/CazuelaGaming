@@ -283,6 +283,7 @@ position = Vector2(0.5, 5)
 shape = SubResource("RectangleShape2D_bj17l")
 
 [node name="Pivot" type="Node2D" parent="."]
+modulate = Color(0.196078, 1, 1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 position = Vector2(-0.25, -0.50001)

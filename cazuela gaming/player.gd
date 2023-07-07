@@ -24,11 +24,15 @@ var isInverted = false
 @onready var animation_player = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
-
+@onready var animationSprite2d = $AnimatedSprite2D
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+
+
+
 
 func _unhandled_key_input(_event):
 	var event := _event as InputEventKey
@@ -38,6 +42,7 @@ func _unhandled_key_input(_event):
 
 ## Physics process separado por estado del jugador
 func _physics_process(delta):
+	animationSprite2d.play("default")
 	# Obtener estados anteriores
 	var was_standing := is_zero_approx(velocity.x) and not airborne
 	var was_walking_left := not was_standing and velocity.x < 0 and not airborne
