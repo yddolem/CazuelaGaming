@@ -75,6 +75,12 @@ func _physics_process(delta):
 		
 	current_progress = path_follow.progress
 	early_y = position.y
+	
+	if missionSuccess==true and replicatorArrivedAtBed == true:
+		MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
+		get_tree().change_scene_to_packed(MissionSuccessScene)
+		
+		
 func portalAwaiting():
 	if (playerArrivedAtPortal != replicatorArrivedAtPortal):
 		return  true
@@ -99,11 +105,6 @@ func gameOverHandler(reason:String):
 	game_over_reason.reason = reason
 	game_over_reason.tip = generateTip(reason)
 	
-func missionSuccessHandler():
-	print("Cambiando a escena mission success")
-	MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
-	get_tree().change_scene_to_packed(MissionSuccessScene)
-	
 func generateTip(reason):
 	if (reason == "CRITICAL_ERROR: Portal desycnc"):
 		return "Remember to enter the portal at the same time as the inverted character"
@@ -111,13 +112,11 @@ func generateTip(reason):
 		return "Cooperate with your future self to complete the mission"
 	if (reason == "CRITICAL_ERROR :Character broke the space-time continium"):
 		return "Imitate the best as you can the position of the inverted character"
-		
+
 
 func _on_player_mission_success():
 	missionSuccess = true
-	missionSuccessHandler()
 	
 func _on_replicator_replicator_arrived_at_bed():
-	missionSuccess = true
 	replicatorArrivedAtBed = true
-	missionSuccessHandler()
+

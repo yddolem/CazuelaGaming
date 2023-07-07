@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_2q2yp"]
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_d661a"]
-[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="3_gehtq"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="3_gehtq"]
 
 [node name="how to play screen" type="Control"]
 layout_mode = 3
