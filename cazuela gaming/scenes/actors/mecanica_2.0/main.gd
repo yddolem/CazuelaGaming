@@ -76,16 +76,19 @@ func _physics_process(delta):
 	current_progress = path_follow.progress
 	early_y = position.y
 	
-	if missionSuccess==true and replicatorArrivedAtBed == true:
-		MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
-		get_tree().change_scene_to_packed(MissionSuccessScene)
-		
+	missionSuccessHandler()
 		
 func portalAwaiting():
 	if (playerArrivedAtPortal != replicatorArrivedAtPortal):
 		return  true
 	else: 
 		return false
+func missionSuccessHandler():
+		
+	if missionSuccess==true and replicatorArrivedAtBed == true:
+		MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
+		get_tree().change_scene_to_packed(MissionSuccessScene)
+		
 func _on_player_player_arrived_at_portal():
 	playerArrivedAtPortal = true
 func _on_replicator_replicator_arrived_at_portal():
