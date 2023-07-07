@@ -272,6 +272,7 @@ color = Color(0.537255, 0.0470588, 0.568627, 1)
 height = 58.0
 
 [node name="Replicator" type="CharacterBody2D"]
+self_modulate = Color(0.364706, 0.364706, 0.364706, 1)
 collision_layer = 0
 script = ExtResource("1_ablcr")
 
@@ -309,6 +310,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
 amount = 10000
 process_material = SubResource("ParticleProcessMaterial_c67wu")
 lifetime = 10.0
