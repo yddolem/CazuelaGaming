@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://djdbanc8v5126"]
+
+[ext_resource type="Script" path="res://PauseOverlay.gd" id="1_jvvxq"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_3w38b"]
+
+[node name="PauseOverlay" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_jvvxq")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.154876, 0.154876, 0.154876, 0.231373)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3w38b")
+theme_override_font_sizes/font_size = 50
+text = "PRESS SPACE TO START"

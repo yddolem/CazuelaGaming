@@ -111,7 +111,7 @@ func generateTip(reason):
 		return "Cooperate with your future self to complete the mission"
 	if (reason == "CRITICAL_ERROR :Character broke the space-time continium"):
 		return "Imitate the best as you can the position of the inverted character"
-
+		
 
 func _on_player_mission_success():
 	missionSuccess = true
