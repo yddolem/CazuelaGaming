@@ -13,6 +13,8 @@ func _on_start_button_pressed():
 func _on_how_to_play_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/GUI/how_to_play_screen.tscn")
 
+func _on_credits_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/GUI/credits.tscn")
 
 func _on_quit_button_pressed():
 	get_tree().quit()
@@ -27,4 +29,7 @@ func _on_how_to_play_button_inverted_pressed():
 
 
 func _on_start_button_inverted_pressed():
+	pass # Replace with function body.
+
+func _on_credits_button_inverted_pressed():
 	pass # Replace with function body.

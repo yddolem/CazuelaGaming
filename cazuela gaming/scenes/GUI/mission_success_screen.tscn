@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
 [ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
-[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
 
 [node name="MissionSuccessScreen" type="Control"]
 layout_mode = 3
@@ -37,7 +37,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_ex603")
 theme_override_font_sizes/font_size = 40
-text = "MISSION SUCCESS"
+text = "MISSION SUCCESSFUL!"
 horizontal_alignment = 1
 
 [node name="MISSION NUMBER" type="Label" parent="MarginContainer/VBoxContainer"]

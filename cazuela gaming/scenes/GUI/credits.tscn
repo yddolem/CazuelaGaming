@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://h55nsw3y1xh7"]
+[gd_scene load_steps=4 format=3 uid="uid://bbntyky5fwel0"]
 
-[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_h3f1n"]
-[ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_yx8hn"]
-[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="2_2ddr1"]
+[ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_2q2yp"]
+[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_d661a"]
+[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="3_gehtq"]
 
 [node name="how to play screen" type="Control"]
 layout_mode = 3
@@ -11,7 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_yx8hn")
+script = ExtResource("1_2q2yp")
 metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -38,9 +38,9 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("1_h3f1n")
+theme_override_fonts/font = ExtResource("2_d661a")
 theme_override_font_sizes/font_size = 30
-text = "RULES OF TIME-TRAVELLING"
+text = "CREDITS"
 horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -51,35 +51,33 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2ddr1")
-theme_override_font_sizes/font_size = 30
-text = "#1 NEVER GET IN CONTACT WITH
- YOUR FUTURE/PAST SELF"
+theme_override_fonts/font = ExtResource("3_gehtq")
+theme_override_font_sizes/font_size = 24
+text = "CAZUELA GAMING TEAM:
+MELODDY GUZMAN
+https://yddolem.itch.io/
+SEBASTIAN mONTEIRO
+https://sebamon.itch.io/
+CRISTOBAL PEREIRA
+https://zelcris.itch.io/
+"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2ddr1")
-theme_override_font_sizes/font_size = 30
-text = "#2 FREE WILL DOESN'T EXIST . 
-YOU MUST COPY THE MOVEMENTS OF 
-YOUR FUTURE SELF. (FOLLOW THE TRAILS)"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2ddr1")
-theme_override_font_sizes/font_size = 30
-text = "#3  YOU MUST ARRIVE AT 
-THE PORTAL AND THE BED SYNCHRONIZED"
+theme_override_fonts/font = ExtResource("3_gehtq")
+theme_override_font_sizes/font_size = 24
+text = "ASSETS:
+GrafxKid's seasonal tileset
+https://grafxkid.itch.io/
+CRAFTPIX.NET's Free Magic Animated Effects Pixel Art
+"
 
 [node name="MAIN MENU button" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_2ddr1")
+theme_override_fonts/font = ExtResource("3_gehtq")
 theme_override_font_sizes/font_size = 30
 text = "BACK TO MAIN MENU"
 
