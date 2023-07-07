@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cpgsmnualmc5f"]
+[gd_scene load_steps=26 format=3 uid="uid://cpgsmnualmc5f"]
 
 [ext_resource type="Script" path="res://replicator.gd" id="1_ablcr"]
 [ext_resource type="Texture2D" uid="uid://c6q7tivfev5cw" path="res://assets/animaciones conejo 2.0/respirando.png" id="2_e5mqk"]
@@ -258,8 +258,6 @@ states/run/position = Vector2(573, 19)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0255"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_8dcgi"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_ilxvu"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_55cie"), "run", "jump", SubResource("AnimationNodeStateMachineTransition_p6ic4"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_wusho"), "jump", "run", SubResource("AnimationNodeStateMachineTransition_7j5jg")]
 graph_offset = Vector2(57, -32)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_2uim2"]
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c67wu"]
 emission_shape = 1
 emission_sphere_radius = 41.3
@@ -309,7 +307,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_vc8e8")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_2uim2")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 10000

@@ -72,9 +72,10 @@ func _physics_process(delta):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if is_on_floor(): # esto hace que no se pueda controlar en el aire
 		if stunned==false:
+			var direction = Input.get_axis("move_left","move_right")
 			
-			var direction = Input.get_axis("ui_left", "ui_right")
 			if direction:
+				pivot.scale.x=direction
 				velocity.x = direction * SPEED
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
