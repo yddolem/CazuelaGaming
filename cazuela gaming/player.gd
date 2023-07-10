@@ -42,6 +42,7 @@ func _unhandled_key_input(_event):
 
 ## Physics process separado por estado del jugador
 func _physics_process(delta):
+	
 	animationSprite2d.play("default")
 	# Obtener estados anteriores
 	var was_standing := is_zero_approx(velocity.x) and not airborne
@@ -61,7 +62,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 		
 		max_height_reached = going_up and velocity.y >= 0 # estaba subiendo y ahora bajando
-	if velocity.x>0:
+	if velocity.x != 0:
 		playback.travel("run")
 	else:
 		playback.travel("idle")

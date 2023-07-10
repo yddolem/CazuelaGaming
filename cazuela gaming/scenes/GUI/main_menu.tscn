@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvwofkewldc6s"]
 
 [ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
-[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3

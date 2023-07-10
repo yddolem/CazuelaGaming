@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://djdbanc8v5126" path="res://scenes/GUI/pause_overlay.tscn" id="2_eywly"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="2_urpm1"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="3_rtft8"]
-[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/Player.tscn" id="4_1psnr"]
+[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="4_1psnr"]
 [ext_resource type="Texture2D" uid="uid://c0e7fvhyx0yt4" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="4_csvtl"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="5_14bcl"]
 [ext_resource type="PackedScene" uid="uid://bve6l1pukmdcu" path="res://scenes/actors/cama_inicial.tscn" id="7_ql6e4"]

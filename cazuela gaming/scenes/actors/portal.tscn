@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dbic8qonshec4"]
+[gd_scene load_steps=17 format=3 uid="uid://dbic8qonshec4"]
 
 [ext_resource type="Script" path="res://scenes/actors/portal.gd" id="1_i4ufj"]
 [ext_resource type="Texture2D" uid="uid://btrd6y1k20u4i" path="res://assets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Tileset/level_tileset.png" id="2_ga2dg"]
@@ -474,8 +474,6 @@ states/idle/node = SubResource("AnimationNodeAnimation_26lsd")
 states/idle/position = Vector2(378, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_ye3pr"), "idle", "activated", SubResource("AnimationNodeStateMachineTransition_mfdcu"), "activated", "idle", SubResource("AnimationNodeStateMachineTransition_7mm3y")]
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_6b523"]
-
 [node name="Portal" type="Area2D" groups=["portal"]]
 script = ExtResource("1_i4ufj")
 
@@ -504,4 +502,3 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_64wer")
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_6b523")

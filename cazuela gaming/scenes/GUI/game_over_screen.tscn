@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwx126d61x2nt"]
 
 [ext_resource type="Script" path="res://scenes/GUI/game_over_screen.gd" id="1_8v4jn"]
-[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="1_l2aao"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="1_l2aao"]
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_r27m5"]
-[ext_resource type="Texture2D" uid="uid://brn2t30l86p5k" path="res://assets/images/error-icon-32.png" id="4_sewcn"]
+[ext_resource type="Texture2D" uid="uid://cr3aalcwxd7eg" path="res://assets/images/error-icon-32.png" id="4_sewcn"]
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3

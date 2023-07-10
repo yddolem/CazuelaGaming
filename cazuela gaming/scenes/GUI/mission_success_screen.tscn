@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
 [ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
-[ext_resource type="FontFile" uid="uid://jwnng1hyhx51" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
 
 [node name="MissionSuccessScreen" type="Control"]
 layout_mode = 3
