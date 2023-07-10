@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://djmrxxjfogdvb"]
+[gd_scene load_steps=12 format=3 uid="uid://djmrxxjfogdvb"]
 
 [ext_resource type="PackedScene" uid="uid://cd0oka5jlde3r" path="res://scenes/levels/base_level.tscn" id="1_m768l"]
 [ext_resource type="Texture2D" uid="uid://dug5gis4c7hqw" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/_Complete_static_BG_(288 x 208).png" id="2_m6j7y"]
 [ext_resource type="PackedScene" uid="uid://cq1g3f0ftq1du" path="res://scenes/GUI/controls_level_1.tscn" id="3_7618b"]
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="3_dkud8"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="4_64lpo"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="6_8omf8"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="6_8omf8"]
+[ext_resource type="AudioStream" uid="uid://brwdh0p7o03mb" path="res://assets/Audio/AmbienceSounds/Ambiance_Forest_Birds_Loop_Stereo.wav" id="7_e8qjm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
 texture = ExtResource("3_dkud8")
@@ -643,3 +644,7 @@ offset_bottom = 369.0
 metadata/_edit_lock_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
+
+[node name="SoundAmbience" type="AudioStreamPlayer2D" parent="." index="13"]
+process_mode = 3
+stream = ExtResource("7_e8qjm")

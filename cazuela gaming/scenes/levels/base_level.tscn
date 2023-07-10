@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://djdbanc8v5126" path="res://scenes/GUI/pause_overlay.tscn" id="2_eywly"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="2_urpm1"]
 [ext_resource type="PackedScene" uid="uid://dbic8qonshec4" path="res://scenes/actors/portal.tscn" id="3_rtft8"]
-[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/player.tscn" id="4_1psnr"]
+[ext_resource type="PackedScene" uid="uid://mudxyunkpc3a" path="res://scenes/actors/Player.tscn" id="4_1psnr"]
 [ext_resource type="Texture2D" uid="uid://c0e7fvhyx0yt4" path="res://assets/Seasonal Tilesets/3 - Tropics/Terrain (16 x 16).png" id="4_csvtl"]
 [ext_resource type="PackedScene" uid="uid://cpgsmnualmc5f" path="res://scenes/actors/replicator.tscn" id="5_14bcl"]
 [ext_resource type="PackedScene" uid="uid://bve6l1pukmdcu" path="res://scenes/actors/cama_inicial.tscn" id="7_ql6e4"]
@@ -1159,6 +1159,8 @@ position = Vector2(135, -2)
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0.266667, 0.25098, 0.752941, 0.466667)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="GameOver" from="Player" to="." method="_on_player_game_over"]
 [connection signal="MissionSuccess" from="Player" to="." method="_on_player_mission_success"]

@@ -39,7 +39,7 @@ func _physics_process(delta):
 		PathReversa.progress+=npcMoveSpeed*delta
 		
 		if position.y !=early_y:
-			print("inverted is jumping")
+
 			state.invertedIsJumping = true
 			state.invertedIsRunning = false
 			state.invertedIsIdle = false
@@ -67,8 +67,6 @@ func _physics_process(delta):
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:
 		timer-=delta
-	if timer >0 && PlayerIsInverted == false:
-		print(timer)
 	if timer <=0 && gameOver==false:
 		gameOver = true
 		gameOverHandler("CRITICAL_ERROR: Portal desycnc")
@@ -122,4 +120,3 @@ func _on_player_mission_success():
 	
 func _on_replicator_replicator_arrived_at_bed():
 	replicatorArrivedAtBed = true
-

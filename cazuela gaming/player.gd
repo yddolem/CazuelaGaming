@@ -13,6 +13,8 @@ var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
+
+
 ## To store airborne state
 var airborne := false 
 var movement_storage : Array[MovementStorage] = []
@@ -25,8 +27,9 @@ var isInverted = false
 @onready var animation_tree = $AnimationTree
 @onready var playback=animation_tree.get("parameters/playback")
 @onready var animationSprite2d = $AnimatedSprite2D
-
-
+@onready var JumpSound = $SoundJump
+@onready var FootstepSound = $SoundFootstep
+@onready var FoostepAudioFiles = ["res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_01.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_02.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_03.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_04.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_05.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_06.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_07.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_08.wav", "res://assets/Audio/WalkSounds/Footsteps_Walk_Grass_Mono_09.wav"]
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -64,10 +67,12 @@ func _physics_process(delta):
 		max_height_reached = going_up and velocity.y >= 0 # estaba subiendo y ahora bajando
 	if velocity.x != 0:
 		playback.travel("run")
+		playRandomFoostepSound()
 	else:
 		playback.travel("idle")
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		JumpSound.play()
 		airborne = true
 		just_jumping = true
 		velocity.y = JUMP_VELOCITY
@@ -134,6 +139,7 @@ func Teleport(area):
 					await(get_tree().create_timer(2).timeout)
 					
 					global_position=portal.global_position
+					
 					alreadyTeleported = true
 					stunned=false
 					isInverted = true
@@ -167,4 +173,15 @@ func _on_inverted_collision_area_entered(area):
 func _on_area_cama_area_entered(area):
 	if area.is_in_group("cama_final"):
 		emit_signal("MissionSuccess")
+			
+			
+
+func playRandomFoostepSound():
+	if !FootstepSound.is_playing():
+		var randomIndex = randi() % FoostepAudioFiles.size()
+		print(randomIndex)
+		var sound = load (FoostepAudioFiles[randomIndex])
+		FootstepSound.stream = sound
+		FootstepSound.play()
 		
+	
