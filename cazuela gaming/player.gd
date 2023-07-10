@@ -12,7 +12,7 @@ signal MissionSuccess
 var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
-
+var teleport_safe_moment = false
 
 
 ## To store airborne state
@@ -67,7 +67,7 @@ func _physics_process(delta):
 		max_height_reached = going_up and velocity.y >= 0 # estaba subiendo y ahora bajando
 	if velocity.x != 0:
 		playback.travel("run")
-		playRandomFoostepSound()
+		playRandomFootstepSound()
 	else:
 		playback.travel("idle")
 	# Handle Jump.
@@ -137,9 +137,10 @@ func Teleport(area):
 					
 
 					await(get_tree().create_timer(2).timeout)
-					
+					teleport_safe_moment = true
 					global_position=portal.global_position
-					
+					await(get_tree().create_timer(0.1).timeout)
+					teleport_safe_moment = false
 					alreadyTeleported = true
 					stunned=false
 					isInverted = true
@@ -166,8 +167,9 @@ func _on_area_reversa_area_exited(area):
 
 
 func _on_inverted_collision_area_entered(area):
-	if area.is_in_group("invertedCollider"):
-		emit_signal("GameOver","CRITICAL_ERROR : Character collided with himself")
+	if teleport_safe_moment == false : 
+		if area.is_in_group("invertedCollider"):
+			emit_signal("GameOver","CRITICAL_ERROR : Character collided with himself")
 
 
 func _on_area_cama_area_entered(area):
@@ -176,7 +178,7 @@ func _on_area_cama_area_entered(area):
 			
 			
 
-func playRandomFoostepSound():
+func playRandomFootstepSound():
 	if !FootstepSound.is_playing():
 		var randomIndex = randi() % FoostepAudioFiles.size()
 		print(randomIndex)

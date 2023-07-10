@@ -2,7 +2,7 @@ extends Node2D
 var playerArrivedAtPortal = false
 var replicatorArrivedAtPortal = false	
 var replicatorArrivedAtBed
-var timer = 2
+var timer = 1.5
 var npcMoveSpeed = 300
 var path_follow
 var PathReversa 

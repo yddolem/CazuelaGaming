@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvwofkewldc6s"]
+[gd_scene load_steps=4 format=3 uid="uid://cvwofkewldc6s"]
 
 [ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+[ext_resource type="AudioStream" uid="uid://l1eeo2cudt71" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -82,6 +83,10 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yuj5i")
 theme_override_font_sizes/font_size = 40
 text = "ERUTNEVDA EHT TRATS"
+
+[node name="OSTPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qgnm3")
+autoplay = true
 
 [connection signal="pressed" from="Normal/START button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Normal/HOW TO PLAY button" to="." method="_on_how_to_play_button_pressed"]

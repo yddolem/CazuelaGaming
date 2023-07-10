@@ -30,8 +30,10 @@ position = Vector2(250, 300)
 [node name="Label" type="Label" parent="PauseOverlay" index="2"]
 anchors_preset = -1
 anchor_bottom = 0.0555556
-offset_right = 645.0
-offset_bottom = 343.0
+offset_left = -65.0
+offset_top = 49.0
+offset_right = 580.0
+offset_bottom = 392.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_fonts/font = ExtResource("4_f0sb8")
@@ -64,11 +66,15 @@ position = Vector2(-157, -1)
 rotation = -0.00185873
 metadata/_edit_lock_ = true
 
+[node name="CollisionShape2D" parent="Path2D/PathReversa/AreaReversa" index="0"]
+position = Vector2(2.99628, 2.00558)
+metadata/_edit_lock_ = true
+
 [node name="Cama Inicial" parent="." index="7"]
 position = Vector2(60, 340)
 
 [node name="Cama Final" parent="." index="8"]
-position = Vector2(60, 162)
+position = Vector2(59, 162)
 
 [node name="ColorRect" parent="." index="9"]
 offset_left = -20.0
