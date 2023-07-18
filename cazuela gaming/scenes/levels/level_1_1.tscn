@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cq1g3f0ftq1du" path="res://scenes/GUI/controls_level_1.tscn" id="3_7618b"]
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="3_dkud8"]
 [ext_resource type="Texture2D" uid="uid://c83viye0ideyi" path="res://assets/Seasonal Tilesets/2 - Autumn Forest/Terrain (16 x 16).png" id="4_64lpo"]
-[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="6_8omf8"]
-[ext_resource type="AudioStream" uid="uid://brwdh0p7o03mb" path="res://assets/Audio/AmbienceSounds/Ambiance_Forest_Birds_Loop_Stereo.wav" id="7_e8qjm"]
+[ext_resource type="FontFile" uid="uid://dskwi5tbd41gw" path="res://fonts/PixelMiddle.ttf" id="6_8omf8"]
+[ext_resource type="AudioStream" uid="uid://cd4ssk45htx56" path="res://assets/Audio/AmbienceSounds/Ambiance_Forest_Birds_Loop_Stereo.wav" id="7_e8qjm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
 texture = ExtResource("3_dkud8")
@@ -595,20 +595,16 @@ theme_override_fonts/font = ExtResource("6_8omf8")
 text = "PRESS SPACE TO JUMP 
 "
 
-[node name="TileMap" parent="." index="3"]
-visible = false
-layer_0/tile_data = PackedInt32Array(720921, 851968, 6)
-
-[node name="Portal" parent="." index="4"]
+[node name="Portal" parent="." index="5"]
 position = Vector2(567, 129)
 
-[node name="Portal2" parent="." index="5"]
+[node name="Portal2" parent="." index="6"]
 position = Vector2(79, 273)
 
-[node name="Player" parent="." index="6"]
+[node name="Player" parent="." index="7"]
 position = Vector2(74, 147)
 
-[node name="Path2D" parent="." index="7"]
+[node name="Path2D" parent="." index="8"]
 position = Vector2(1, -1)
 curve = SubResource("Curve2D_1o0vq")
 
@@ -629,21 +625,21 @@ metadata/_edit_lock_ = true
 [node name="CollisionShape2D" parent="Path2D/PathReversa/AreaReversa" index="0"]
 metadata/_edit_lock_ = true
 
-[node name="Cama Inicial" parent="." index="8"]
+[node name="Cama Inicial" parent="." index="9"]
 position = Vector2(75, 164)
 
-[node name="Cama Final" parent="." index="9"]
+[node name="Cama Final" parent="." index="10"]
 position = Vector2(561, 290)
 
-[node name="ColorRect" parent="." index="10"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
+
+[node name="ColorRect" parent="." index="12"]
 visible = false
 offset_left = -15.0
 offset_top = -117.0
 offset_right = 653.0
 offset_bottom = 369.0
 metadata/_edit_lock_ = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 
 [node name="SoundAmbience" type="AudioStreamPlayer2D" parent="." index="13"]
 process_mode = 3
