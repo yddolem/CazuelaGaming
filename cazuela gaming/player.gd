@@ -163,13 +163,13 @@ func _on_replicator_replicator_arrived_at_portal():
 func _on_area_reversa_area_exited(area):
 	if area.is_in_group("areaReversa"):
 		if isInverted == true:
-			emit_signal("GameOver","CRITICAL_ERROR :Character broke the space-time continium")
+			emit_signal("GameOver","CRITICAL_ERROR: Character broke the space-time continuity")
 
 
 func _on_inverted_collision_area_entered(area):
 	if teleport_safe_moment == false : 
 		if area.is_in_group("invertedCollider"):
-			emit_signal("GameOver","CRITICAL_ERROR : Character collided with himself")
+			emit_signal("GameOver","CRITICAL_ERROR: Character collided with himself")
 
 
 func _on_area_cama_area_entered(area):

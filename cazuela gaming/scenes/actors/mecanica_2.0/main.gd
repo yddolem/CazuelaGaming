@@ -69,7 +69,7 @@ func _physics_process(delta):
 		timer-=delta
 	if timer <=0 && gameOver==false:
 		gameOver = true
-		gameOverHandler("CRITICAL_ERROR: Portal desycnc")
+		gameOverHandler("CRITICAL_ERROR: Portal desynced")
 		
 	current_progress = path_follow.progress
 	early_y = position.y
@@ -107,12 +107,12 @@ func gameOverHandler(reason:String):
 	game_over_reason.tip = generateTip(reason)
 	
 func generateTip(reason):
-	if (reason == "CRITICAL_ERROR: Portal desycnc"):
-		return "Remember to enter the portal at the same time as the inverted character"
-	if (reason == "CRITICAL_ERROR : Character collided with himself"):
+	if (reason == "CRITICAL_ERROR: Portal desynced"):
+		return "Remember to enter the portal at the same time as the inverted you"
+	if (reason == "CRITICAL_ERROR: Character collided with himself"):
 		return "Cooperate with your future self to complete the mission"
-	if (reason == "CRITICAL_ERROR :Character broke the space-time continium"):
-		return "Imitate the best as you can the position of the inverted character"
+	if (reason == "CRITICAL_ERROR: Character broke the space-time continuity"):
+		return "Imitate the best as you can the position of the inverted you"
 
 
 func _on_player_mission_success():
