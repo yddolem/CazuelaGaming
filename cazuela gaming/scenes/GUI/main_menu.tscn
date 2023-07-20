@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cvwofkewldc6s"]
 
 [ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
-[ext_resource type="Texture2D" uid="uid://dttks2edphmxr" path="res://assets/two rabbits wit 0.png" id="2_a2bgf"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
-[ext_resource type="AudioStream" uid="uid://41l41a2emvl4" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
+[ext_resource type="Texture2D" uid="uid://cigq4fl71j36h" path="res://assets/two rabbits wit 0.png" id="2_a2bgf"]
+[ext_resource type="FontFile" uid="uid://b4ysq3rdv6yqr" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+[ext_resource type="AudioStream" uid="uid://dvggwbdw13f7m" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="5_sh648"]
 
 [sub_resource type="Theme" id="Theme_c4t6b"]

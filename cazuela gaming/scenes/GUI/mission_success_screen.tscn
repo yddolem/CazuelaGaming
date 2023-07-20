@@ -2,8 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
 [ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
-[ext_resource type="AudioStream" uid="uid://cu5es5gwxsb5q" path="res://assets/Audio/Music/ost.wav" id="4_vt2gm"]
+[ext_resource type="FontFile" uid="uid://b4ysq3rdv6yqr" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+[ext_resource type="AudioStream" uid="uid://cpcvvwrfodsw3" path="res://assets/Audio/Music/ost.wav" id="4_vt2gm"]
 
 [node name="MissionSuccessScreen" type="Control"]
 layout_mode = 3

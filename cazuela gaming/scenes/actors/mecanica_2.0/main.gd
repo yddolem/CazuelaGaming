@@ -93,7 +93,10 @@ func missionSuccessHandler():
 		
 	if missionSuccess==true and replicatorArrivedAtBed == true:
 		MissionSuccessScene = preload("res://scenes/GUI/mission_success_screen.tscn")
-		get_tree().change_scene_to_packed(MissionSuccessScene)
+		if CurrentScene.misionId == 5:
+			get_tree().change_scene_to_file("res://scenes/levels/final.tscn")	
+		else:
+			get_tree().change_scene_to_packed(MissionSuccessScene)
 		
 func _on_player_player_arrived_at_portal():
 	playerArrivedAtPortal = true

@@ -12,9 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://btrd6y1k20u4i" path="res://assets/Foozle_2DT0001_Science_Fiction_Labs_Tileset/Tileset/level_tileset.png" id="6_gjihn"]
 [ext_resource type="PackedScene" uid="uid://bve6l1pukmdcu" path="res://scenes/actors/cama_inicial.tscn" id="7_ql6e4"]
 [ext_resource type="PackedScene" uid="uid://drlqi87bomr1l" path="res://scenes/actors/cama_final.tscn" id="8_ffdw5"]
-[ext_resource type="AudioStream" uid="uid://g3y7o7gwl4tl" path="res://assets/Audio/tp sound.wav" id="13_23vj2"]
-[ext_resource type="AudioStream" uid="uid://dl1hwj4gforu2" path="res://assets/Audio/Music/ost.ogg" id="14_vmg28"]
-[ext_resource type="Texture2D" uid="uid://ca6n4mlbs2hkg" path="res://assets/228110.png" id="15_x4nlc"]
+[ext_resource type="AudioStream" uid="uid://41hgit0rapai" path="res://assets/Audio/tp sound.wav" id="13_23vj2"]
+[ext_resource type="AudioStream" uid="uid://bqvmaa5pa288" path="res://assets/Audio/Music/ost.ogg" id="14_vmg28"]
+[ext_resource type="Texture2D" uid="uid://cwxdgic63wwyn" path="res://assets/228110.png" id="15_x4nlc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
 texture = ExtResource("1_s5you")
@@ -2064,7 +2064,7 @@ terrain_set_1/terrain_2/color = Color(0.196078, 0.568627, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_2fovm")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7m06"]
-radius = 138.058
+radius = 232.0
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_snbho")

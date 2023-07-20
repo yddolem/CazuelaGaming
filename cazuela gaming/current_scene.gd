@@ -6,7 +6,7 @@ extends Node
 "res://scenes/levels/level_1_4.tscn",
 "res://scenes/levels/level_1_3.tscn",
 "res://scenes/levels/level_1_5.tscn",
-"res://scenes/levels/final.gd"]
+"res://scenes/levels/final.tscn"]
 
 
 

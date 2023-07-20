@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://cd0oka5jlde3r" path="res://scenes/levels/base_level.tscn" id="1_vrnen"]
 [ext_resource type="Texture2D" uid="uid://dug5gis4c7hqw" path="res://assets/Seasonal Tilesets/1 - Grassland/Background parts/_Complete_static_BG_(288 x 208).png" id="2_joy4e"]
 [ext_resource type="PackedScene" uid="uid://b8md10rb61p41" path="res://scenes/GUI/controlslevel0.tscn" id="3_dwc07"]
-[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="4_f0sb8"]
-[ext_resource type="AudioStream" uid="uid://ddy0c2l7p77fx" path="res://assets/Audio/AmbienceSounds/Ambiance_Forest_Birds_Loop_Stereo.wav" id="5_0xy5i"]
+[ext_resource type="FontFile" uid="uid://b4ysq3rdv6yqr" path="res://fonts/PixelMiddle.ttf" id="4_f0sb8"]
+[ext_resource type="AudioStream" uid="uid://3ppe452vgvji" path="res://assets/Audio/AmbienceSounds/Ambiance_Forest_Birds_Loop_Stereo.wav" id="5_0xy5i"]
 
 [sub_resource type="Curve2D" id="Curve2D_wpkby"]
 _data = {
