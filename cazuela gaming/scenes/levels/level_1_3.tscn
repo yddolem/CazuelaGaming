@@ -49,6 +49,12 @@ position = Vector2(55, 324)
 position = Vector2(673, 241)
 scale = Vector2(-1, 1)
 
+[node name="ColorRect" parent="." index="10"]
+offset_left = -151.0
+offset_top = -148.0
+offset_right = 738.0
+offset_bottom = 375.0
+
 [node name="Camera2D" type="Camera2D" parent="." index="12"]
 position = Vector2(318, 135)
 zoom = Vector2(0.8, 0.8)

@@ -19,7 +19,9 @@ var missionSuccess = false
 var colorRect 
 var trails 
 var teleportFinished= false
+@onready var TpSound = $TeleportSound
 signal teleportNow
+@onready var ost = $OSTPLAYER
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -32,10 +34,11 @@ func _ready():
 	colorRect  = $ColorRect
 	colorRect.hide()
 	trails = $Path2D/PathFollow2D/Replicator/GPUParticles2D
+	ost.play(Ostplayer.songPosition)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	
+	Ostplayer.songPosition = ost.get_playback_position()
 	if replicatorArrivedAtPortal == false && path_follow.progress_ratio<1:
 		path_follow.progress+=npcMoveSpeed*delta
 		PathReversa.progress+=npcMoveSpeed*delta
@@ -125,4 +128,5 @@ func _on_replicator_replicator_arrived_at_bed():
 func teleport():
 	emit_signal("teleportNow")
 	print("teleportNow")
+	TpSound.play()
 	teleportFinished = true

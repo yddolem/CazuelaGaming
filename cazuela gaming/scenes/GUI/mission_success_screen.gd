@@ -2,15 +2,16 @@ extends Control
 
 var currentLevel
 var nextMissionId 
+@onready var ost = $OSTPLAYER
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	currentLevel = CurrentScene
 	setMissionSuccessInfo()
-
+	ost.play(Ostplayer.songPosition)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	Ostplayer.songPosition=ost.get_playback_position()
 	
 func setMissionSuccessInfo():
 	updateUI()

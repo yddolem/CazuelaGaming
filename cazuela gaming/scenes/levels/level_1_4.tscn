@@ -45,3 +45,9 @@ position = Vector2(68, 323)
 [node name="Cama Final" parent="." index="9"]
 position = Vector2(571, 321)
 scale = Vector2(-1, 1)
+
+[node name="ColorRect" parent="." index="10"]
+offset_left = -14.0
+offset_top = -53.0
+offset_right = 648.0
+offset_bottom = 367.0

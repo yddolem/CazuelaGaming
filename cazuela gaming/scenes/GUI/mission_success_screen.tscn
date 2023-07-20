@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://larn1chyjnxw"]
+[gd_scene load_steps=5 format=3 uid="uid://larn1chyjnxw"]
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_ex603"]
 [ext_resource type="Script" path="res://scenes/GUI/mission_success_screen.gd" id="1_p1hie"]
 [ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_5lian"]
+[ext_resource type="AudioStream" uid="uid://cu5es5gwxsb5q" path="res://assets/Audio/ost.wav" id="4_4iwok"]
 
 [node name="MissionSuccessScreen" type="Control"]
 layout_mode = 3
@@ -71,6 +72,10 @@ theme_override_fonts/font = ExtResource("2_5lian")
 theme_override_font_sizes/font_size = 30
 text = "QUIT TO DESKTOP"
 alignment = 0
+
+[node name="OSTPLAYER" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("4_4iwok")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BACK TO MAIN MENU button" to="." method="_on_back_to_main_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/NEXT MISSION button" to="." method="_on_next_mission_button_pressed"]

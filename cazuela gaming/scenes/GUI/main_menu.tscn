@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvwofkewldc6s"]
+[gd_scene load_steps=7 format=3 uid="uid://cvwofkewldc6s"]
 
 [ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
+[ext_resource type="Texture2D" uid="uid://dttks2edphmxr" path="res://assets/two rabbits wit 0.png" id="2_a2bgf"]
 [ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
 [ext_resource type="AudioStream" uid="uid://41l41a2emvl4" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
+[ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="5_sh648"]
+
+[sub_resource type="Theme" id="Theme_c4t6b"]
+default_font = ExtResource("2_yuj5i")
+default_font_size = 12
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3
@@ -17,81 +23,74 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g8bk8")
 
+[node name="TwoRabbitsWit0" type="Sprite2D" parent="."]
+modulate = Color(0.364706, 0.196078, 0.160784, 1)
+position = Vector2(321.5, 199.5)
+scale = Vector2(0.625977, 0.483398)
+texture = ExtResource("2_a2bgf")
+
 [node name="Normal" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 5.0
-offset_top = 180.0
-offset_right = 646.0
-offset_bottom = 364.0
+offset_left = 224.0
+offset_top = 247.0
+offset_right = 432.0
+offset_bottom = 363.0
+alignment = 1
 
 [node name="START button" type="Button" parent="Normal"]
 layout_mode = 2
 size_flags_vertical = 8
+theme = SubResource("Theme_c4t6b")
 theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "START THE ADVENTURE"
-metadata/_edit_lock_ = true
 
 [node name="HOW TO PLAY button" type="Button" parent="Normal"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "HOW TO PLAY"
-metadata/_edit_lock_ = true
 
 [node name="CREDITS button" type="Button" parent="Normal"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "credits"
 
 [node name="QUIT button" type="Button" parent="Normal"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 20
 text = "QUIT"
-
-[node name="Inverted" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 2.0
-offset_right = 643.0
-offset_bottom = 186.0
-
-[node name="QUIT button inverted" type="Button" parent="Inverted"]
-layout_mode = 2
-size_flags_vertical = 8
-theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
-text = "TIUQ"
-
-[node name="CREDITS button inverted" type="Button" parent="Inverted"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
-text = "stiderc"
-
-[node name="HOW TO PLAY button inverted" type="Button" parent="Inverted"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
-text = "YALP OT WOH"
-metadata/_edit_lock_ = true
-
-[node name="START button inverted" type="Button" parent="Inverted"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_yuj5i")
-theme_override_font_sizes/font_size = 40
-text = "ERUTNEVDA EHT TRATS"
 
 [node name="OSTPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_qgnm3")
 autoplay = true
 
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_sh648")
+text = "CAZUELA GAMING PRESENTS"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 642.0
+offset_bottom = 240.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_sh648")
+theme_override_font_sizes/font_size = 40
+text = "TIME HOPPER"
+
 [connection signal="pressed" from="Normal/START button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Normal/HOW TO PLAY button" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="Normal/CREDITS button" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="Normal/QUIT button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Inverted/QUIT button inverted" to="." method="_on_quit_button_inverted_pressed"]
-[connection signal="pressed" from="Inverted/HOW TO PLAY button inverted" to="." method="_on_how_to_play_button_inverted_pressed"]
-[connection signal="pressed" from="Inverted/START button inverted" to="." method="_on_start_button_inverted_pressed"]

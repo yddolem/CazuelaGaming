@@ -54,4 +54,5 @@ position = Vector2(872, 144)
 scale = Vector2(-1, 1)
 
 [node name="ColorRect" parent="." index="10"]
-visible = false
+offset_right = 1281.0
+offset_bottom = 718.0

@@ -312,7 +312,6 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
 amount = 10000
 process_material = SubResource("ParticleProcessMaterial_c67wu")
 lifetime = 10.0

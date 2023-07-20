@@ -3,15 +3,18 @@ var gameoverReason: String
 var gameoverTip: String
 var game_over_reason
 var currentLevel
+@onready var ost = $OSTPLAYER
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	game_over_reason = GameOverReason
 	setGameoverInfo()
+	ost.play(Ostplayer.songPosition)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	Ostplayer.songPosition = ost.get_playback_position()
 	
 func setGameoverInfo():
 	print("cambiando la pantalla del game over")
