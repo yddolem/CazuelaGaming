@@ -12,7 +12,7 @@ var state = InvertedState
 var arrivedAtPortal = false
 var trails
 @onready var pivot = $Pivot
-
+var PortalAreaReplicator
 func _ready():
 	($"../../../Player" as Player).movement_finished.connect(start_replication)
 	# NOTA: evitar obtener nodos de esta forma. Si es necesario conectar dos
@@ -90,35 +90,38 @@ func replicate_jumping(movement : MovementStorage.Jumping, tween : Tween):
 			.set_delay(movement.fall_duration).from(movement.max_height_position.y)
 
 
-func Teleport(area):
+func TeleportReplicator(area):
+	print("ejecutando función TeleportReplicator")
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if portal!= area:
-			if (portal.id==area.id):
-				if (!portal.lockPortal):
+				if (!portal.lockPortalNPC):
 					area.LockedPortalNPC()
-					
 
 					await(get_tree().create_timer(2).timeout)
-					
-					global_position=portal.global_position
 
+					global_position=portal.global_position
 					isInverted = false	
 
-
-func _on_player_player_arrived_at_portal():
-	playerArrivedAtPortal = true
 	
 
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("portal"):
 		if !area.lockPortalNPC:
+			emit_signal("replicatorArrivedAtPortal")
 			arrivedAtPortal = true
 			trails.emitting = false
-			emit_signal("replicatorArrivedAtPortal")
-
-			if playerArrivedAtPortal == true:
-				Teleport(area)	
+			PortalAreaReplicator = area
+			#if playerArrivedAtPortal == true:
+				#TeleportReplicator(area)	
 
 func _on_area_cama_area_entered(area):
 	if area.is_in_group("cama_inicial"):
 		emit_signal("replicatorArrivedAtBed")
+
+
+func _on_player_player_arrived_at_portal():
+	playerArrivedAtPortal = true
+
+
+func _on_base_level_teleport_now():
+	TeleportReplicator(PortalAreaReplicator)
