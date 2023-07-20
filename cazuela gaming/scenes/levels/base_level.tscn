@@ -2124,6 +2124,8 @@ color = Color(0.266667, 0.25098, 0.752941, 0.466667)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
+[connection signal="teleportNow" from="." to="Player" method="_on_base_level_teleport_now"]
+[connection signal="teleportNow" from="." to="Path2D/PathFollow2D/Replicator" method="_on_base_level_teleport_now"]
 [connection signal="GameOver" from="Player" to="." method="_on_player_game_over"]
 [connection signal="MissionSuccess" from="Player" to="." method="_on_player_mission_success"]
 [connection signal="PlayerIsInverted" from="Player" to="." method="_on_player_player_is_inverted"]

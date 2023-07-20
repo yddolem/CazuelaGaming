@@ -18,6 +18,8 @@ var MissionSuccessScene
 var missionSuccess = false
 var colorRect 
 var trails 
+var teleportFinished= false
+signal teleportNow
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -47,13 +49,11 @@ func _physics_process(delta):
 		if state.invertedIsJumping == false:
 			
 			if  current_progress == path_follow.progress:
-				print("inverted is idle")
 				state.invertedIsIdle = true
 				state.invertedIsRunning = false
 				state.invertedIsJumping = false
 				
 			if current_progress != path_follow.progress:
-				print("inverted is running")
 				state.invertedIsRunning = true
 				state.invertedIsIdle= false
 				state.invertedIsJumping = false
@@ -74,6 +74,8 @@ func _physics_process(delta):
 	current_progress = path_follow.progress
 	early_y = position.y
 	
+	if replicatorArrivedAtPortal && playerArrivedAtPortal && teleportFinished == false:
+		teleport()
 	missionSuccessHandler()
 		
 func portalAwaiting():
@@ -120,3 +122,7 @@ func _on_player_mission_success():
 	
 func _on_replicator_replicator_arrived_at_bed():
 	replicatorArrivedAtBed = true
+func teleport():
+	emit_signal("teleportNow")
+	print("teleportNow")
+	teleportFinished = true

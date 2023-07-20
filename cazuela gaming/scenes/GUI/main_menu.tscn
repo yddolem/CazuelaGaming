@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cvwofkewldc6s"]
 
 [ext_resource type="Script" path="res://scenes/GUI/main_menu.gd" id="1_g8bk8"]
-[ext_resource type="FontFile" uid="uid://dskwi5tbd41gw" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
-[ext_resource type="AudioStream" uid="uid://dqay66jfv0kxo" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_yuj5i"]
+[ext_resource type="AudioStream" uid="uid://41l41a2emvl4" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="3_qgnm3"]
 
 [node name="Main Menu" type="Control"]
 layout_mode = 3

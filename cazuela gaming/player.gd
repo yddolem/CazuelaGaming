@@ -13,7 +13,7 @@ var replicatorArrivedAtPortal = false
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 var teleport_safe_moment = false
-
+var PortalAreaPlayer
 
 ## To store airborne state
 var airborne := false 
@@ -131,19 +131,17 @@ func _physics_process(delta):
 		
 
 
-func Teleport(area):
+func TeleportPlayer(area):
+	print("ejecutando funcion teleport player")
 	for portal in get_tree().get_nodes_in_group("portal"):
 		if portal!= area:
-			if (portal.id==area.id):
 				if (!portal.lockPortal):
 					area.LockedPortal()
-					
-
 					await(get_tree().create_timer(2).timeout)
-					teleport_safe_moment = true
+					#teleport_safe_moment = true
 					global_position=portal.global_position
-					await(get_tree().create_timer(0.1).timeout)
-					teleport_safe_moment = false
+					#await(get_tree().create_timer(0.5).timeout)
+					#teleport_safe_moment = false
 					alreadyTeleported = true
 					stunned=false
 					isInverted = true
@@ -156,8 +154,8 @@ func _on_area_2d_area_entered(area):
 		if !area.lockPortal && alreadyTeleported == false:
 			emit_signal("playerArrivedAtPortal")
 			stunned=true
-			if replicatorArrivedAtPortal == true:	
-				Teleport(area)
+			PortalAreaPlayer = area
+			
 		
 func _on_replicator_replicator_arrived_at_portal():
 	replicatorArrivedAtPortal = true
@@ -184,9 +182,12 @@ func _on_area_cama_area_entered(area):
 func playRandomFootstepSound():
 	if !FootstepSound.is_playing():
 		var randomIndex = randi() % FoostepAudioFiles.size()
-		print(randomIndex)
 		var sound = load (FoostepAudioFiles[randomIndex])
 		FootstepSound.stream = sound
 		FootstepSound.play()
 		
 	
+
+
+func _on_base_level_teleport_now():
+	TeleportPlayer(PortalAreaPlayer)
