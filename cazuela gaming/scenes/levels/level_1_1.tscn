@@ -634,7 +634,6 @@ position = Vector2(561, 290)
 [node name="CanvasLayer" type="CanvasLayer" parent="." index="11"]
 
 [node name="ColorRect" parent="." index="12"]
-visible = false
 offset_left = -15.0
 offset_top = -117.0
 offset_right = 653.0
