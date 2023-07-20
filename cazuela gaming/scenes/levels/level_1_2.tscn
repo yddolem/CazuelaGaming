@@ -50,3 +50,7 @@ offset_left = -8.0
 offset_top = -118.0
 offset_right = 633.0
 offset_bottom = 352.0
+
+[node name="Rewind" parent="." index="14"]
+position = Vector2(590.25, 39.125)
+scale = Vector2(0.157227, 0.144043)

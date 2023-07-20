@@ -113,3 +113,7 @@ metadata/_edit_lock_ = true
 process_mode = 3
 stream = ExtResource("5_0xy5i")
 autoplay = true
+
+[node name="Rewind" parent="." index="16"]
+position = Vector2(588, 37)
+scale = Vector2(0.143067, 0.133789)

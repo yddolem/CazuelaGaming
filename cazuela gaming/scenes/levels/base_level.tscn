@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cd0oka5jlde3r"]
+[gd_scene load_steps=24 format=3 uid="uid://cd0oka5jlde3r"]
 
 [ext_resource type="Texture2D" uid="uid://bpqlnyftcvu0a" path="res://assets/Seasonal Tilesets/1 - Grassland/Terrain (16 x 16).png" id="1_s5you"]
 [ext_resource type="Script" path="res://scenes/actors/mecanica_2.0/main.gd" id="1_snbho"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://drlqi87bomr1l" path="res://scenes/actors/cama_final.tscn" id="8_ffdw5"]
 [ext_resource type="AudioStream" uid="uid://g3y7o7gwl4tl" path="res://assets/Audio/tp sound.wav" id="13_23vj2"]
 [ext_resource type="AudioStream" uid="uid://dl1hwj4gforu2" path="res://assets/Audio/Music/ost.ogg" id="14_vmg28"]
+[ext_resource type="Texture2D" uid="uid://ca6n4mlbs2hkg" path="res://assets/228110.png" id="15_x4nlc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_008bq"]
 texture = ExtResource("1_s5you")
@@ -2063,7 +2064,7 @@ terrain_set_1/terrain_2/color = Color(0.196078, 0.568627, 0, 1)
 sources/0 = SubResource("TileSetAtlasSource_2fovm")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q7m06"]
-radius = 251.18
+radius = 138.058
 
 [node name="BaseLevel" type="Node2D"]
 script = ExtResource("1_snbho")
@@ -2133,6 +2134,10 @@ volume_db = -16.0
 [node name="OSTPLAYER" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = ExtResource("14_vmg28")
+
+[node name="Rewind" type="Sprite2D" parent="."]
+position = Vector2(640, -19)
+texture = ExtResource("15_x4nlc")
 
 [connection signal="teleportNow" from="." to="Player" method="_on_base_level_teleport_now"]
 [connection signal="teleportNow" from="." to="Path2D/PathFollow2D/Replicator" method="_on_base_level_teleport_now"]

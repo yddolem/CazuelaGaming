@@ -643,3 +643,7 @@ metadata/_edit_lock_ = true
 [node name="SoundAmbience" type="AudioStreamPlayer2D" parent="." index="13"]
 process_mode = 3
 stream = ExtResource("7_e8qjm")
+
+[node name="Rewind" parent="." index="17"]
+position = Vector2(587.875, 34.6875)
+scale = Vector2(0.144043, 0.130127)

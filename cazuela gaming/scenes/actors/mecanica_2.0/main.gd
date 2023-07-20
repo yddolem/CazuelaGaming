@@ -22,6 +22,7 @@ var teleportFinished= false
 @onready var TpSound = $TeleportSound
 signal teleportNow
 @onready var ost = $OSTPLAYER
+@onready var rewind = $Rewind
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	path_follow=$Path2D/PathFollow2D
@@ -35,6 +36,7 @@ func _ready():
 	colorRect.hide()
 	trails = $Path2D/PathFollow2D/Replicator/GPUParticles2D
 	ost.play(Ostplayer.songPosition)
+	rewind.hide()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -66,6 +68,7 @@ func _physics_process(delta):
 	if PlayerIsInverted == true:
 		PathReversa.progress-=npcMoveSpeed*delta	
 		colorRect.show()
+		rewind.show()
 		
 	#Si uno llega al portal y el otro no	
 	if portalAwaiting()==true:

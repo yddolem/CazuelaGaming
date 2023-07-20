@@ -58,3 +58,7 @@ offset_bottom = 375.0
 [node name="Camera2D" type="Camera2D" parent="." index="12"]
 position = Vector2(318, 135)
 zoom = Vector2(0.8, 0.8)
+
+[node name="Rewind" parent="." index="15"]
+position = Vector2(670, 307)
+scale = Vector2(0.174316, 0.162109)
