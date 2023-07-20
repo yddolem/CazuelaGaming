@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://h55nsw3y1xh7"]
+[gd_scene load_steps=5 format=3 uid="uid://h55nsw3y1xh7"]
 
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="1_h3f1n"]
 [ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_yx8hn"]
-[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="2_2ddr1"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="2_2ddr1"]
+[ext_resource type="AudioStream" uid="uid://41l41a2emvl4" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="4_k355s"]
 
 [node name="how to play screen" type="Control"]
 layout_mode = 3
@@ -82,5 +83,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("2_2ddr1")
 theme_override_font_sizes/font_size = 30
 text = "BACK TO MAIN MENU"
+
+[node name="OSTPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_k355s")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MAIN MENU button" to="." method="_on_main_menu_button_pressed"]

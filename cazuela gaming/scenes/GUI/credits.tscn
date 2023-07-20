@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbntyky5fwel0"]
+[gd_scene load_steps=6 format=3 uid="uid://bbntyky5fwel0"]
 
 [ext_resource type="Script" path="res://scenes/GUI/how_to_play_screen.gd" id="1_2q2yp"]
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_d661a"]
-[ext_resource type="FontFile" uid="uid://ddmdekas8wq46" path="res://fonts/PixelMiddle.ttf" id="3_gehtq"]
+[ext_resource type="Texture2D" uid="uid://ci6ymda75bosl" path="res://assets/two rabbits wit 1.png" id="2_qp1yw"]
+[ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="3_gehtq"]
+[ext_resource type="AudioStream" uid="uid://41l41a2emvl4" path="res://assets/Audio/Music/Tenet Inspired Soundtrack.mp3" id="4_af2ps"]
 
 [node name="how to play screen" type="Control"]
 layout_mode = 3
@@ -22,12 +24,17 @@ offset_bottom = 394.0
 color = Color(0.00392157, 0.380392, 0.521569, 1)
 metadata/_edit_lock_ = true
 
+[node name="TwoRabbitsWit1" type="Sprite2D" parent="."]
+position = Vector2(320, 209.5)
+scale = Vector2(0.625, 0.415039)
+texture = ExtResource("2_qp1yw")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 17.0
-offset_right = 625.0
-offset_bottom = 368.0
+offset_right = 624.0
+offset_bottom = 361.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -80,5 +87,9 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gehtq")
 theme_override_font_sizes/font_size = 30
 text = "BACK TO MAIN MENU"
+
+[node name="OSTPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_af2ps")
+autoplay = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MAIN MENU button" to="." method="_on_main_menu_button_pressed"]
