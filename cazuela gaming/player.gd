@@ -126,6 +126,9 @@ func _physics_process(delta):
 		current_movement = MovementStorage.Walking.new(global_position)
 	if max_height_reached: # si estaba subiendo y comenzó a bajar
 		(current_movement as MovementStorage.Jumping).max_height_position = global_position
+	else:
+		pass
+		
 
 
 func TeleportPlayer(area):
