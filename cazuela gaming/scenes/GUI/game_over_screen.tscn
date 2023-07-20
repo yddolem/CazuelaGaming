@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dltnloaghhqb1" path="res://fonts/PixelMiddle.ttf" id="1_l2aao"]
 [ext_resource type="FontFile" uid="uid://cwrx7d6butryr" path="res://fonts/Planes_ValMore.ttf" id="2_r27m5"]
 [ext_resource type="Texture2D" uid="uid://cr3aalcwxd7eg" path="res://assets/images/error-icon-32.png" id="4_sewcn"]
-[ext_resource type="AudioStream" uid="uid://cu5es5gwxsb5q" path="res://assets/Audio/ost.wav" id="5_knt5j"]
+[ext_resource type="AudioStream" uid="uid://cu5es5gwxsb5q" path="res://assets/Audio/Music/ost.wav" id="5_m30qr"]
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -94,7 +94,7 @@ texture = ExtResource("4_sewcn")
 
 [node name="OSTPLAYER" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
-stream = ExtResource("5_knt5j")
+stream = ExtResource("5_m30qr")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/BACK TO MAIN MENU button" to="." method="_on_back_to_main_menu_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/RETRY button" to="." method="_on_retry_button_pressed"]

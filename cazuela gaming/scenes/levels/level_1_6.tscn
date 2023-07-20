@@ -56,3 +56,7 @@ scale = Vector2(-1, 1)
 [node name="ColorRect" parent="." index="10"]
 offset_right = 1281.0
 offset_bottom = 718.0
+
+[node name="Rewind" parent="." index="14"]
+position = Vector2(112, 630)
+scale = Vector2(0.373047, 0.341797)
